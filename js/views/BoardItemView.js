@@ -10,18 +10,18 @@ define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, Board
 
 		className: 'thumb',
 
-		template: _.template('<a href="#"><div></div><div><img src="css/imgs/image.JPG" width=100 height=100 /></div></a>'),
+		template: _.template('<a href="#"><div class="thumbnail"><img src="css/imgs/image.JPG" width=100 height=100 /></div></a>'),
 
 		render: function () {
 			this.$el.html(this.template(this.model.toJSON()));
 		},
 
 		events: {
-			'click img': 'alertMessage'
+			'click div .thumbnail': 'alertMessage'
 		},
 
 		alertMessage: function (e) {
-			alert('Image is clicked!');
+			console.log('Image is clicked!');
 		}
 
 	});
