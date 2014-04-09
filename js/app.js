@@ -45,6 +45,8 @@ function(_, Backbone, test_temp, BoardItem, BoardItemView) {
 	$('#image').html(boardItemView.el);
 	console.log($('#image').html(boardItemView.el));
 
+	console.log(test_temp);
+
 	// document.addEventListener('click', function(e){
 	// 	console.log(e.target);
 	// }, false);
