@@ -2,26 +2,26 @@ define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, Board
 	boardItem = new BoardItem({itemTitle: 'Memory Game'});
 	var BoardItemView = Backbone.View.extend({
 
-		initialize: function () {
-			this.model.on('change', this.render, this);
-		},
-
 		tagName: 'li',
 
 		className: 'thumb',
 
-		template: _.template('<a href="#"><div class="thumbnail"><img src="css/imgs/image.JPG" width=100 height=100 /></div></a>'),
-
+		initialize: function () {
+			this.model.on('change', this.render, this);
+		},			
+		
 		render: function () {
 			this.$el.html(this.template(this.model.toJSON()));
 		},
 
+		template: _.template('<a href="#"><div class="testdiv"><img src="css/imgs/image.JPG" width=100 height=100 /></div></a>'),
+
 		events: {
-			'click div .thumbnail': 'alertMessage'
+			'click div': 'showMessage'
 		},
 
-		alertMessage: function (e) {
-			console.log('Image is clicked!');
+		showMessage: function (e) {
+			alert('Message');
 		}
 
 	});
