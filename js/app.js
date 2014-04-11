@@ -27,9 +27,10 @@ require ([
 			'text!templates/test_temp.html', 
 			'models/Board', 
 			'views/BoardItemView',
-			'collections/BoardItemList'
+			'collections/BoardItemList',
+			'collectionviews/BoardItemListView'
 ], 
-function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList) {	
+function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList, BoardItemListView) {	
 	
 	// INSTANTIATE A MODEL chat-board-menu-item
 	var boardItem = new BoardItem({itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png'});
@@ -79,6 +80,8 @@ function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList) {
 
 	console.log(entertainmentItems);
 
+	// EXPERIMENTING WITH A COLLECTIONVIEW!
+	var boardItemCollectionView = new BoardItemListView({collection: boardItemList});
 
 	// var compiledTemplate = _.template(test_temp);
 	// console.log(Appointment);
