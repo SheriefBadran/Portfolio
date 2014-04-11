@@ -1,5 +1,6 @@
 define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, BoardItem) {
 	boardItem = new BoardItem({itemTitle: 'Memory Game'});
+
 	var BoardItemView = Backbone.View.extend({
 
 		tagName: 'li',
@@ -12,16 +13,21 @@ define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, Board
 		
 		render: function () {
 			this.$el.html(this.template(this.model.toJSON()));
+			console.log(this.model.toJSON());
 		},
 
-		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img src="css/imgs/image.JPG" width=100 height=100 /></div></a>'),
+		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img src="<%= imgUrl %>" width=100 height=100 /></div></a>'),
 
 		events: {
 			'click img': 'showMessage'
 		},
 
 		showMessage: function (e) {
-			alert('Message');
+			alert(this.model.get('itemTitle'));
+		},
+
+		url: function () {
+			return this.model.get('imgUrl');
 		}
 
 	});

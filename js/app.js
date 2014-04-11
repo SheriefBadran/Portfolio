@@ -30,9 +30,10 @@ require ([
 ], 
 function(_, Backbone, test_temp, BoardItem, BoardItemView) {	
 	
-	// Instantiate a model		
-	var boardItem = new BoardItem({itemTitle: 'MemoryGame'});
+	// Instantiate a model chat-board-menu-item
+	var boardItem = new BoardItem({itemTitle: 'Chat', imgUrl: 'css/imgs/chat.png'});
 	console.log(boardItem.get('itemTitle'));
+	console.log(boardItem.get('imgUrl'));
 
 	// Instantiate a view
 	var boardItemView = new BoardItemView({model: boardItem});
