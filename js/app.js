@@ -31,7 +31,7 @@ require ([
 function(_, Backbone, test_temp, BoardItem, BoardItemView) {	
 	
 	// Instantiate a model chat-board-menu-item
-	var boardItem = new BoardItem({itemTitle: 'Chat', imgUrl: 'css/imgs/chat.png'});
+	var boardItem = new BoardItem({itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png'});
 	console.log(boardItem.get('itemTitle'));
 	console.log(boardItem.get('imgUrl'));
 

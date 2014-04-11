@@ -16,7 +16,7 @@ define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, Board
 			console.log(this.model.toJSON());
 		},
 
-		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img src="<%= imgUrl %>" width=100 height=100 /></div></a>'),
+		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img src="<%= imgSrc %>" width=100 height=100 /></div></a>'),
 
 		events: {
 			'click img': 'showMessage'
