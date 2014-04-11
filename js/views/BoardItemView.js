@@ -14,10 +14,10 @@ define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, Board
 			this.$el.html(this.template(this.model.toJSON()));
 		},
 
-		template: _.template('<a href="#"><div class="testdiv"><img src="css/imgs/image.JPG" width=100 height=100 /></div></a>'),
+		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img src="css/imgs/image.JPG" width=100 height=100 /></div></a>'),
 
 		events: {
-			'click div': 'showMessage'
+			'click img': 'showMessage'
 		},
 
 		showMessage: function (e) {
