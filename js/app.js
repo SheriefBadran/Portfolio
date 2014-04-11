@@ -26,21 +26,58 @@ require ([
 			'backbone', 
 			'text!templates/test_temp.html', 
 			'models/Board', 
-			'views/BoardItemView'
+			'views/BoardItemView',
+			'collections/BoardItemList'
 ], 
-function(_, Backbone, test_temp, BoardItem, BoardItemView) {	
+function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList) {	
 	
-	// Instantiate a model chat-board-menu-item
+	// INSTANTIATE A MODEL chat-board-menu-item
 	var boardItem = new BoardItem({itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png'});
 	console.log(boardItem.get('itemTitle'));
-	console.log(boardItem.get('imgUrl'));
+	console.log(boardItem.get('imgSrc'));
 
-	// Instantiate a view
+	// INSTANTIATE A VIEW 
 	var boardItemView = new BoardItemView({model: boardItem});
 	boardItemView.render();
 
 	$('.thumb').html(boardItemView.el);
 
+	// EXPERIMENT WITH A COLLECTION!
+	// boardItemList will now be able to handle a set of models.
+	var boardItemList = new BoardItemList();
+	boardItemList.on('shout!', function () {
+		console.log('I am a custom app.js eventlistener!');
+	});
+	boardItemList.trigger('shout!');
+
+	boardItemList.add(boardItem);
+
+	console.log(boardItemList.length);
+	console.log(boardItemList.at(0));
+
+	boardItemList.remove(boardItem);
+	console.log(boardItemList.length);
+
+	var boardItems = [
+		{itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png', cathegory: 'entertainment'},
+		{itemTitle: 'Memory Game', imgSrc: 'css/imgs/memory.png', cathegory: 'entertainment'},
+		{itemTitle: 'Rss Feeds', imgSrc: 'css/imgs/rss.png', cathegory: 'news'}
+	];
+
+	boardItemList.reset(boardItems);
+
+	console.log(boardItemList.length);
+	console.log(boardItemList.at(1));
+
+	boardItemList.forEach(function (boardItem) {
+		console.log(boardItem.get('itemTitle'));
+	});
+
+	var entertainmentItems = boardItemList.map(function (boardItem) {
+		return boardItem.get('cathegory') === 'entertainment';
+	});
+
+	console.log(entertainmentItems);
 
 
 	// var compiledTemplate = _.template(test_temp);
