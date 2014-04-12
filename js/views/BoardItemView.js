@@ -5,8 +5,6 @@ define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, Board
 
 		tagName: 'li',
 
-		className: 'thumb',
-
 		initialize: function () {
 			this.model.on('change', this.render, this);
 		},			

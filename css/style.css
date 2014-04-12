@@ -1,8 +1,4 @@
-.thumbnail {
-	border: 1px solid #000;
-}
-
-ul.thumb li hover .mask {
+/*ul.thumb li hover .mask {
 	-webkit-transform:scale(1.1);
 }
 
@@ -17,7 +13,6 @@ ul.thumb li hover .mask {
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	poistion: absolute;
-	/*backkground: ;*/
 	left: 0;
 	top: 0;
 	width: 273px;
@@ -32,9 +27,9 @@ ul.thumb li hover .mask {
 	width: 271px;
 	height: 291px;
 	z-index: 990;
-}
-/*.testdiv{
-	border: 1px solid #000;
-	width: 50px;
-	height: 50px;
 }*/
+
+#menuBoard ul li {
+	float: left;
+	list-style-type: none;
+}

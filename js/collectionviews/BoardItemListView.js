@@ -3,6 +3,10 @@ define(['underscore', 'backbone', 'views/BoardItemView'], function (_, Backbone,
 
 	var BoardItemListView = Backbone.View.extend({
 
+		tagName: 'ul',
+
+		className: 'thumb',
+
 		initialize: function () {
 			this.collection.on('add', this.addItem, this);
 		},
