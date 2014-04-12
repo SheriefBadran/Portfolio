@@ -1,5 +1,5 @@
 define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, BoardItem) {
-	boardItem = new BoardItem({itemTitle: 'Memory Game'});
+'use strict';
 
 	var BoardItemView = Backbone.View.extend({
 

@@ -1,4 +1,5 @@
 define(['underscore', 'backbone', 'views/BoardItemView'], function (_, Backbone, BoardItemView) {
+'use strict';
 
 	var BoardItemListView = Backbone.View.extend({
 

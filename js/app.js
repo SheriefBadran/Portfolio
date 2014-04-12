@@ -1,5 +1,5 @@
+'use strict';
 require.config({
-
 	paths: {
 
 		// folder paths
@@ -30,7 +30,8 @@ require ([
 			'collections/BoardItemList',
 			'collectionviews/BoardItemListView'
 ], 
-function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList, BoardItemListView) {	
+function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList, BoardItemListView) {
+'use strict';
 	
 	// INSTANTIATE A MODEL chat-board-menu-item
 	var boardItem = new BoardItem({itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png'});
@@ -83,7 +84,7 @@ function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList, BoardI
 	// EXPERIMENTING WITH A COLLECTIONVIEW!
 	var boardItemListView = new BoardItemListView({collection: boardItemList});
 	boardItemListView.render();
-	
+
 	console.log(boardItemListView.el);
 
 	// var compiledTemplate = _.template(test_temp);

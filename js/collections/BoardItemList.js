@@ -1,4 +1,5 @@
 define(['underscore', 'backbone', 'models/Board'], function (_, Backbone, BoardItem) {
+'use strict';
 
 	var BoardItemList = Backbone.Collection.extend({
 
