@@ -15,11 +15,10 @@ function (_, Backbone, InitMenuBoard) {
 		initialize: function () {
 
 			// Retrieve rendered html for the menu board.
-			// Unit-test: Check if menuBoard is an object literal.
 			var menuBoard = InitMenuBoard();
 
-			// Inject the rendered menuBoard - HTML into the DOM.
-			$('#menuBoard').html(menuBoard.HTML);
+			// Inject the rendered HTML into the DOM.
+			$('#menuBoard').html(menuBoard);
 		},
 
 		start: function () {

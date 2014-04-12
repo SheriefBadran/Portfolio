@@ -8,7 +8,7 @@ require.config({
 });
 
 var tests = [
-	'tests/app/domOperations'
+	'tests/app/domOperations' 
 ];
 
 require (tests, function(domOperations) {	

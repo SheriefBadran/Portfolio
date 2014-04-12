@@ -1,5 +1,5 @@
 define(['app/domOperations'], function(DomOperations) {
-'use strict';
+	'use strict';
 	return{
 		test: function() {			
 

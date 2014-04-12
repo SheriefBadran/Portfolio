@@ -21,9 +21,9 @@ require.config({
 	}
 });
 
-require (['app/router'], function(PortfolioApp) {
+require (['app/router'], function(ResumeApp) {
 'use strict';
 
-	PortfolioApp.start();
+	ResumeApp.start();
 
 });

@@ -15,7 +15,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 433,
+				"buffer_size": 476,
 				"line_ending": "Windows"
 			}
 		},
@@ -117,7 +117,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -125,7 +125,7 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 433,
+						"buffer_size": 476,
 						"regions":
 						{
 						},

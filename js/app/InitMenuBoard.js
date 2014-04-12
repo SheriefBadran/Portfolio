@@ -1,6 +1,6 @@
 define([
-	'collections/BoardItemList', 
-	'collectionviews/BoardItemListView'
+			'collections/BoardItemList', 
+			'collectionviews/BoardItemListView'
 ], 
 function (BoardItemList, BoardItemListView) {
 'use strict';
@@ -26,10 +26,7 @@ function (BoardItemList, BoardItemListView) {
 		// Every model in the collection has a view. Render the view for each model.
 		boardItemListView.render();
 
-		return {
-			HTML: boardItemListView.el,
-			boardItemList: boardItemList
-		};
+		return boardItemListView.el;
 	};
 
 	return InitMenuBoard;
