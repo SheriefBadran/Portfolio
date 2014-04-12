@@ -15,15 +15,15 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 429,
-				"line_ending": "Unix"
+				"buffer_size": 476,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "css/style.css",
 			"settings":
 			{
-				"buffer_size": 109,
+				"buffer_size": 558,
 				"line_ending": "Windows"
 			}
 		},
@@ -31,7 +31,7 @@
 			"file": "js/app.js",
 			"settings":
 			{
-				"buffer_size": 1839,
+				"buffer_size": 2282,
 				"line_ending": "Windows"
 			}
 		},
@@ -39,7 +39,7 @@
 			"file": "js/views/BoardItemView.js",
 			"settings":
 			{
-				"buffer_size": 692,
+				"buffer_size": 806,
 				"line_ending": "Windows"
 			}
 		},
@@ -76,6 +76,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Sherief/Documents/My Web Sites/testsite/index.html",
 		"/C/Users/Sherief/Documents/CvProject/node_modules/PersonalApp/js/app.js",
 		"/C/Users/Sherief/Documents/CvProject/node_modules/PersonalApp/js/views/BoardItemView.js",
 		"/C/Users/Sherief/Documents/CvProject/node_modules/PersonalApp/js/app/domOperations.js",
@@ -116,7 +117,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -124,15 +125,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 429,
+						"buffer_size": 476,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								164,
-								164
+								0,
+								0
 							]
 						],
 						"settings":
@@ -152,7 +153,7 @@
 					"file": "css/style.css",
 					"settings":
 					{
-						"buffer_size": 109,
+						"buffer_size": 558,
 						"regions":
 						{
 						},
@@ -165,7 +166,8 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -178,15 +180,15 @@
 					"file": "js/app.js",
 					"settings":
 					{
-						"buffer_size": 1839,
+						"buffer_size": 2282,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								488,
-								1836
+								0,
+								0
 							]
 						],
 						"settings":
@@ -205,15 +207,15 @@
 					"file": "js/views/BoardItemView.js",
 					"settings":
 					{
-						"buffer_size": 692,
+						"buffer_size": 806,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								536,
-								536
+								0,
+								0
 							]
 						],
 						"settings":
