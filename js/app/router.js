@@ -1,10 +1,9 @@
 define([
 	'underscore', 
-	'backbone', 
-	'collections/BoardItemList',
-	'collectionviews/BoardItemListView'
+	'backbone',
+	'app/InitMenuBoard'
 ], 
-function (_, Backbone, BoardItemList, BoardItemListView) {
+function (_, Backbone, InitMenuBoard) {
 'use strict';
 	
 	var ResumeApp = new (Backbone.Router.extend({
@@ -14,22 +13,12 @@ function (_, Backbone, BoardItemList, BoardItemListView) {
 		},
 
 		initialize: function () {
-			var boardItemList = new BoardItemList();
 
-			var boardItems = [
-				{itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png', cathegory: 'entertainment'},
-				{itemTitle: 'Memory Game', imgSrc: 'css/imgs/rss.png', cathegory: 'entertainment'},
-				{itemTitle: 'Rss Feeds', imgSrc: 'css/imgs/rss.png', cathegory: 'news'}
-			];
+			// Retrieve rendered html for the menu board.
+			var menuBoard = InitMenuBoard();
 
-			boardItemList.reset(boardItems);
-
-			var boardItemListView = new BoardItemListView({collection: boardItemList});
-			boardItemListView.render();
-
-			console.log(boardItemListView.el);
-
-			$('#menuBoard').html(boardItemListView.el);
+			// Inject the rendered HTML into the DOM.
+			$('#menuBoard').html(menuBoard);
 		},
 
 		start: function () {
