@@ -18,7 +18,7 @@ function (_, Backbone, InitMenuBoard) {
 			var menuBoard = InitMenuBoard();
 
 			// Inject the rendered HTML into the DOM.
-			$('#menuBoard').html(menuBoard);
+			$('#menuBoard').html(menuBoard.HTML);
 		},
 
 		start: function () {

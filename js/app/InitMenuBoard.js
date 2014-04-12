@@ -26,7 +26,10 @@ function (BoardItemList, BoardItemListView) {
 		// Every model in the collection has a view. Render the view for each model.
 		boardItemListView.render();
 
-		return boardItemListView.el;
+		return {
+			HTML: boardItemListView.el,
+			boardItemList: boardItemList
+		};
 	};
 
 	return InitMenuBoard;
