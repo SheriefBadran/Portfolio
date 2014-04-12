@@ -61,7 +61,7 @@ function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList, BoardI
 
 	var boardItems = [
 		{itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png', cathegory: 'entertainment'},
-		{itemTitle: 'Memory Game', imgSrc: 'css/imgs/memory.png', cathegory: 'entertainment'},
+		{itemTitle: 'Memory Game', imgSrc: 'css/imgs/rss.png', cathegory: 'entertainment'},
 		{itemTitle: 'Rss Feeds', imgSrc: 'css/imgs/rss.png', cathegory: 'news'}
 	];
 
@@ -81,7 +81,10 @@ function(_, Backbone, test_temp, BoardItem, BoardItemView, BoardItemList, BoardI
 	console.log(entertainmentItems);
 
 	// EXPERIMENTING WITH A COLLECTIONVIEW!
-	var boardItemCollectionView = new BoardItemListView({collection: boardItemList});
+	var boardItemListView = new BoardItemListView({collection: boardItemList});
+	boardItemListView.render();
+	
+	console.log(boardItemListView.el);
 
 	// var compiledTemplate = _.template(test_temp);
 	// console.log(Appointment);

@@ -13,7 +13,7 @@ define (['underscore', 'backbone', 'models/Board'], function (_, Backbone, Board
 		
 		render: function () {
 			this.$el.html(this.template(this.model.toJSON()));
-			console.log(this.model.toJSON());
+			return this;
 		},
 
 		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img src="<%= imgSrc %>" width=100 height=100 /></div></a>'),
