@@ -26,7 +26,7 @@ app.configure( function() {
 
 // Routes
 app.get( '/api', function( request, response ) {
-    response.send( 'Library API is running!' );
+    response.send( 'Library API is running.' );
 });
 
 //Start server
