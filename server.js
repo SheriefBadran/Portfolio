@@ -1,3 +1,5 @@
+#!/bin/env node
+
 var application_root = __dirname,
     express = require( 'express' ), //Web framework
     path = require( 'path' ), //Utilities for dealing with file paths
@@ -18,7 +20,7 @@ app.configure( function() {
     app.use( app.router );
 
     //Where to serve static content
-    app.use( express.static( path.join( application_root, 'site') ) );
+    app.use('/', express.static( path.join( application_root, 'site') ) );
 
     //Show all errors in development
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
@@ -26,12 +28,15 @@ app.configure( function() {
 
 // Routes
 app.get( '/api', function( request, response ) {
-    response.send( 'Library API is running.' );
+    response.send( 'Rest API is running.' );
 });
 
 //Start server
-var port = 4711;
-app.listen( port, function() {
+var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var port    = parseInt(process.env.OPENSHIFT_NODEJS_PORT) || 8080;
+app.set('ipaddr', ipaddr);
+app.set('port', port);
+app.listen( port, ipaddr, function() {
     console.log( 'Express server listening on port %d in %s mode', 
     port, app.settings.env );
 });
