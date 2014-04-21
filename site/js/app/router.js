@@ -1,12 +1,13 @@
 define([
 	'underscore', 
 	'backbone',
-	'app/InitMenuBoard'
+	'app/InitMenuBoard',
+	'views/BoardItemView'
 ], 
-function (_, Backbone, InitMenuBoard) {
+function (_, Backbone, InitMenuBoard, BoardItemView) {
 'use strict';
 	
-	var ResumeApp = new (Backbone.Router.extend({
+	var PortfolioApp = new (Backbone.Router.extend({
 
 		routes: {
 			'': 'index'
@@ -46,5 +47,5 @@ function (_, Backbone, InitMenuBoard) {
 		}
 	}));
 
-	return ResumeApp;
+	return PortfolioApp;
 });

@@ -28,7 +28,8 @@ function (BoardItemList, BoardItemListView) {
 
 		return {
 			HTML: boardItemListView.el,
-			boardItemList: boardItemList
+			boardItemList: boardItemList,
+			boardItemListView: boardItemListView
 		};
 	};
 
