@@ -5,6 +5,8 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 
 		tagName: 'section',
 
+		className: 'message',
+
 		initialize: function () {
 			this.model.on('change', this.render, this);
 		},

@@ -33,11 +33,3 @@
 	float: left;
 	list-style-type: none;
 }
-
-.messageWindow {
-	display: block;
-	border: 1px solid #000;
-	width: 600px;
-	height: 300px;
-	clear: both;
-}

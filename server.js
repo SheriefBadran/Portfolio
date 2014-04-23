@@ -67,7 +67,8 @@ app.get( '/api/messages', function( request, response ) {
         // } else {
         //     return console.log( err );
         // }
-        return messages;
+        var mess = JSON.parse(messages);
+        return response.send(mess);
     });
 
     return response.send(resp);
@@ -88,6 +89,7 @@ app.post( '/api/messages', function( request, response ) {
             return console.log( err );
         }
     });
+    console.log(MessageModel.db.collections);
     return response.send( message );
 });
 
