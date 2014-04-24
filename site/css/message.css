@@ -1,23 +1,85 @@
 .messageWindow {
 	display: block;
 	border: 1px solid #000;
-	width: 600px;
-	height: auto;
+	min-width: 320px;
+	width: 30%;
+	height: 300px;
+	margin: 0 auto;
 	clear: both;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.topBar {
+	position: relative;
+	background-color: #1BA8ED;
+	-webkit-border-radius: 0 20px 0 0;
+	-o-border-radius: 0 20px 0 0;
+	-ms-border-radius:  0 20px 0 0;
+	border-radius: 0 20px 0 0;
+	/*background-image: -o-linear-gradient(90deg, rgb(0,0,0), rgb(70,70,70));
+	background-image: linear-gradient(90deg, rgb(0,0,0), rgb(70,70,70));*/
+	border-bottom: 1px solid #000;
+	width: 100%;
+	height: 30px;
+	display: block;
 }
 
 #messagesArea {
 	width: 100%;
 	border: 1px solid red;
+	background-color: #fff;
 }
 
 section.message {
+	min-width: 300px;
 	width: 80%;
-	height: 50px;
+	height: 80px;
 	margin: 20px auto;
-	border: 1px solid green;	
+	background-color: #1BA8ED;
+	-webkit-border-radius: 0 20px 20px 20px;
+	-o-border-radius: 0px 20px 20px 20px;
+	-ms-border-radius:  0px 20px 20px 20px;
+	border-radius: 0 20px 20px 20px;
 }
 
 .text {
-	margin: 5px 0 0 5px;
+	display: block;
+	padding: 10px 0 0 10px;
+	font-family: "Helvetica Neue", Arial;
+	font-size: 1.2em;
 }
+
+/* p tag it self is a container within the top bar. */
+p .topbarContainer {
+	position: relative;
+}
+
+p .deleteIcon {
+  position: absolute;
+  top: 9px;
+  right: 22px;
+}
+
+p .editIcon {
+  position: absolute;
+  top: 9px;
+  right: 42px;
+}
+
+#messageView {
+	width: 75%;
+	border-radius: 20px;
+	outline: none;
+	resize: none;
+	overflow: auto;
+}
+
+.edit {
+	display: none;
+}
+
+.editing {
+	display: block;
+}
+

@@ -12,9 +12,13 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 
 		urlRoot: '/messages',
 
+		// deleteMessage: function () {
+		// 	this.set({deleted: true});
+		// 	this.save();
+		// },
+
 		deleteMessage: function () {
-			this.set({deleted: true});
-			this.save();
+			this.destroy();
 		}
 	});
 

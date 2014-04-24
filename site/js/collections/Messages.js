@@ -5,21 +5,15 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 
 		initialize: function () {
 			//Empty
+			this.on('destroy', this.verify);
 		},
 
 		// This collection is managing the Message model
 		model: Message,
 
-		shoutReset: function () {
-			console.log('Messages is reset with models!');
-		},
-
-		shoutAdd: function () {
-			console.log('Model added to Messages!');
-		},
-
-		shoutRemove: function () {
-			console.log('Model removed from Messages');
+		verify: function () {
+			// Veryfy that when model is destroyed, it's also removed from collection.
+			console.log(this);
 		}
 	});
 

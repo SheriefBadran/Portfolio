@@ -16,7 +16,7 @@ define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, M
 			'keypress #messageView': 'submitOnEnter'
 		},
 
-		template: _.template('<div id="messagesArea"></div><textarea id="messageView"></textarea><input id="send" type="submit" />'),
+		template: _.template('<div id="messagesArea"></div><textarea id="messageView" placeholder="Type a message"></textarea><input id="send" type="submit" />'),
 
 		addMessage: function (message) {
 			var messageView = new MessageView({model: message});
