@@ -4,6 +4,7 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 	var Messages = Backbone.Collection.extend({
 
 		initialize: function () {
+
 			//Empty
 			this.on('destroy', this.verify);
 		},
@@ -12,6 +13,7 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 		model: Message,
 
 		verify: function () {
+			
 			// Veryfy that when model is destroyed, it's also removed from collection.
 			console.log(this);
 		}

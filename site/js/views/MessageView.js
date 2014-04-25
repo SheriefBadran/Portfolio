@@ -8,6 +8,7 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 		className: 'message',
 
 		initialize: function () {
+
 			this.model.on('change', this.render, this);
 			this.model.on('destroy', this.removeMessageFromDom, this);
 		},
@@ -20,6 +21,7 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 		},
 
 		render: function () {
+
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		},
@@ -32,15 +34,18 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 		},
 
 		removeMessageFromDom: function () {
+
 			this.$el.remove();
 		},
 
 		startEditMode: function () {
+
 			this.$('.edit').addClass('editing');
 			this.$('.text').addClass('edit');
 		},
 
 		closeEditMode: function () {
+			
 			var value = this.$('.editing').val();
 
 			if (!value) {

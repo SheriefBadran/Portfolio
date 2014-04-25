@@ -6,6 +6,7 @@ define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, M
 		className: 'messageWindow',
 
 		initialize: function () {
+			
 			this.input = this.$("#messageView");
 			this.initialRender();
 			this.collection.on('add', this.addItem, this);
@@ -19,23 +20,29 @@ define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, M
 		template: _.template('<div id="messagesArea"></div><textarea id="messageView" placeholder="Type a message"></textarea><input id="send" type="submit" />'),
 
 		addMessage: function (message) {
+
 			var messageView = new MessageView({model: message});
 			this.$el.append(messageView.render().el);
 		},
 
 		render: function () {
+
 			this.collection.forEach(this.addMessage, this);
 			return this;
 		},
 
 		initialRender: function () {
+
 			this.$el.html(this.template());
 		},
 
 		submitOnEnter: function (e) {
+
 			// BUG!! Message is submit though textarea is empty.
 			if (e.keyCode != 13) { return };
 			this.submitMessage();
+
+			// Prevent textarea to change row on enter.
 			e.preventDefault();
 		},
 
