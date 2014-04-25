@@ -36,6 +36,7 @@ define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, M
 			// BUG!! Message is submit though textarea is empty.
 			if (e.keyCode != 13) { return };
 			this.submitMessage();
+			e.preventDefault();
 		},
 
 		submitMessage: function (e) {
