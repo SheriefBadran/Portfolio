@@ -25,21 +25,24 @@ define ([
 		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img id="<%= itemTitle %>" src="<%= imgSrc %>" width=100 height=100 /></div></a>'),
 
 		events: {
-			'click img': 'openPortfolioApp',
+			'click img': 'navigateOnClick',
 		},
 
-		openPortfolioApp: function (e) {
+		navigateOnClick: function (e) {
 
 			var target = e.target;
 			console.log(target.id);
+			var collection;
 
 			if (typeof target.id === 'string' && target.id === 'Chat') {
-				var messageWindow = InitMessageWindow();
-				$('body').append(messageWindow.HTML);
+				
+				// IF I KEEP IT LIKE THIS - REMOVE THIS MODULE DEPENDENCY InitMessageWindow.
+				Backbone.history.navigate("messages", {trigger: true});
 			};
 
 			if (typeof target.id === 'string' && target.id === 'Memory Game') {
 				console.log('open memory game window');
+				// Backbone.history.navigate("rss", {trigger: true});
 			};
 
 			if (typeof target.id === 'string' && target.id === 'Rss Feeds') {

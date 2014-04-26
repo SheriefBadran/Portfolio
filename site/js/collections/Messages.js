@@ -3,6 +3,8 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 
 	var Messages = Backbone.Collection.extend({
 
+		url: '/messages',
+
 		initialize: function () {
 
 			//Empty

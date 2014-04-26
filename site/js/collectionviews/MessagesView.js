@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, MessageView) {
+define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], function (_, Backbone, Message, MessageView) {
 'use strict';
 
 	var messagesView = Backbone.View.extend({
@@ -7,25 +7,26 @@ define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, M
 
 		initialize: function () {
 			
-			this.input = this.$("#messageView");
+			this.input = this.$(".messageView");
 			this.initialRender();
-			this.collection.on('add', this.addItem, this);
+			// this.collection.on('add', this.addItem, this);
+			this.collection.on('reset', this.renderMessages, this);
 		},
 
 		events: {
-			'click #send': 'submitMessage',
-			'keypress #messageView': 'submitOnEnter'
+			'click .send': 'submitMessage',
+			'keypress .messageView': 'submitOnEnter'
 		},
 
-		template: _.template('<div id="messagesArea"></div><textarea id="messageView" placeholder="Type a message"></textarea><input id="send" type="submit" />'),
+		template: _.template('<div class="messagesArea"></div><textarea class="messageView" placeholder="Type a message"></textarea><input class="send" type="submit" />'),
 
 		addMessage: function (message) {
 
 			var messageView = new MessageView({model: message});
-			this.$el.append(messageView.render().el);
+			this.$(".messagesArea").append(messageView.render().el);
 		},
 
-		render: function () {
+		renderMessages: function () {
 
 			this.collection.forEach(this.addMessage, this);
 			return this;
@@ -39,7 +40,9 @@ define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, M
 		submitOnEnter: function (e) {
 
 			// BUG!! Message is submit though textarea is empty.
-			if (e.keyCode != 13) { return };
+			if (e.keyCode != 13) { return; }
+			if (!this.$(".messageView").val()) { return; }
+
 			this.submitMessage();
 
 			// Prevent textarea to change row on enter.
@@ -49,23 +52,21 @@ define(['underscore', 'backbone', 'views/MessageView'], function (_, Backbone, M
 		submitMessage: function (e) {
 
 			// If no message -> return
-			if (!this.$("#messageView").val()) { return; }
+			if (!this.$(".messageView").val()) { return; }
 
-			// Retrieve nr of models in collection.
-			var length = this.collection.length;
+			var message = new Message({text: this.$(".messageView").val()});
 
-			// Create a message model and add it to this collection.
-			this.collection.add({text: this.$("#messageView").val()});
+			// Save message to server.
+			message.save();
+
+			this.collection.add(message);
 
 			// Reset textarea.
-			this.$("#messageView").val('');
-			this.$("#messageView").focus();
+			this.$(".messageView").val('');
+			this.$(".messageView").focus();
 
-			// Create a MessageView for the created model.
-			var messageView = new MessageView({model: this.collection.at(length)});
-
-			// Inject the rendered MessageView HTML into the DOM.
-			this.$("#messagesArea").append(messageView.render().el);
+			// Create a MessageView for the model and render it into the DOM.
+			this.addMessage(message);
 		}
 	});
 

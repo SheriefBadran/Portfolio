@@ -60,7 +60,7 @@ var Message = new mongoose.Schema({text: String, date: Date});
 var MessageModel = mongoose.model('Message', Message);
 
 // Get a list of all messages
-app.get( '/api/messages', function( request, response ) {
+app.get( '/messages', function( request, response ) {
 
     return MessageModel.find( function( err, messages ) {
         // if( !err ) {
@@ -106,11 +106,10 @@ app.get( '/messages/:id', function( request, response ) {
 
 // Update a message
 app.put( '/messages/:id', function( request, response ) {
-    console.log( 'Updating message ' + request.body.title );
+    console.log( 'Updating message ' + request.body.text );
     return MessageModel.findById( request.params.id, function( err, message ) {
-        message.title = request.body.title;
-        message.author = request.body.author;
-        message.releaseDate = request.body.releaseDate;
+        message.text = request.body.text;
+        message.date = request.body.date;
 
         return message.save( function( err ) {
             if( !err ) {
@@ -119,6 +118,20 @@ app.put( '/messages/:id', function( request, response ) {
                 console.log( err );
             }
             return response.send( message );
+        });
+    });
+});
+
+app.delete( '/messages/:id', function( request, response ) {
+    console.log( 'Deleting message with id: ' + request.params.id );
+    return MessageModel.findById( request.params.id, function( err, message ) {
+        return message.remove( function( err ) {
+            if( !err ) {
+                console.log( 'Message removed' );
+                return response.send( '' );
+            } else {
+                console.log( err );
+            }
         });
     });
 });

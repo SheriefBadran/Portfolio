@@ -45,14 +45,16 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 		},
 
 		closeEditMode: function () {
-			
+
 			var value = this.$('.editing').val();
 
 			if (!value) {
 				this.deleteMessageModel();
 			}
 			else {
-				this.model.save({text: value});
+				// call a mehtod on model!!
+				// this.model.save({text: value});
+				this.model.updateModel(value);
 				this.$('.edit').removeClass('editing');
 				this.$('.text').removeClass('edit');
 			}

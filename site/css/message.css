@@ -25,7 +25,7 @@
 	display: block;
 }
 
-#messagesArea {
+.messagesArea {
 	width: 100%;
 	border: 1px solid red;
 	background-color: #fff;
@@ -67,7 +67,7 @@ p .editIcon {
   right: 42px;
 }
 
-#messageView {
+.messageView {
 	width: 75%;
 	border-radius: 20px;
 	outline: none;

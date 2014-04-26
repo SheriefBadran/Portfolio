@@ -2,15 +2,17 @@ define([
 	'underscore', 
 	'backbone',
 	'app/InitMenuBoard',
-	'views/BoardItemView'
+	'app/InitMessageWindow'
 ], 
-function (_, Backbone, InitMenuBoard, BoardItemView) {
+function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 'use strict';
 	
 	var PortfolioApp = new (Backbone.Router.extend({
 
 		routes: {
-			'': 'index'
+			'': 'index',
+			// 'rss': 'rssFeed',
+			'messages': 'loadMessages'
 		},
 
 		initialize: function () {
@@ -36,6 +38,14 @@ function (_, Backbone, InitMenuBoard, BoardItemView) {
 
 		chat: function () {
 			console.log('Chat');
+		},
+
+		loadMessages: function () {
+			
+			var messageWindow = InitMessageWindow();
+			$('body').append(messageWindow.HTML);
+
+			messageWindow.messages.fetch({reset: true});
 		},
 
 		memoryGame: function () {

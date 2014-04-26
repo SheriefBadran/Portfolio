@@ -12,13 +12,16 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 
 		urlRoot: '/messages',
 
-		// deleteMessage: function () {
-		// 	this.set({deleted: true});
-		// 	this.save();
-		// },
+		// given for mongo db
+		idAttribute: '_id',
 
 		deleteMessage: function () {
 			this.destroy();
+		},
+
+		updateModel: function (value) {
+			this.set({text: value});
+			this.save();
 		}
 	});
 
