@@ -4,6 +4,7 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 	var Message = Backbone.Model.extend({
 
 		defaults: function () {
+
 			return {
 				text: '',
 				date: new Date()
@@ -16,11 +17,18 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 		idAttribute: '_id',
 
 		deleteMessage: function () {
+
 			this.destroy();
 		},
 
-		updateModel: function (value) {
+		updateMessage: function (value) {
+
 			this.set({text: value});
+			this.save();
+		},
+
+		saveMessage: function () {
+			
 			this.save();
 		}
 	});

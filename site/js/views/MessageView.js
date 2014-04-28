@@ -54,7 +54,7 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 			else {
 				// call a mehtod on model!!
 				// this.model.save({text: value});
-				this.model.updateModel(value);
+				this.model.updateMessage(value);
 				this.$('.edit').removeClass('editing');
 				this.$('.text').removeClass('edit');
 			}

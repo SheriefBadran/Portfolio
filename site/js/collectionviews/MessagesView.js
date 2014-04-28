@@ -57,7 +57,7 @@ define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], functi
 			var message = new Message({text: this.$(".messageView").val()});
 
 			// Save message to server.
-			message.save();
+			message.saveMessage();
 
 			this.collection.add(message);
 
