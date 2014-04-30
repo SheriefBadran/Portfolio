@@ -1,5 +1,6 @@
-define(['app/domOperations'], function(DomOperations) {
-	'use strict';
+define(['app/domOperations', 'models/Message'], function(DomOperations, Message) {
+'use strict';
+	
 	return{
 		test: function() {			
 

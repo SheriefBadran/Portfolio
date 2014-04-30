@@ -1,18 +1,40 @@
 require.config({
 
 	paths: {
-		lib: '../libs',
+		// folder paths
+		// libs: '../libs',
 		tests: '../tests',
-		app: '../app'
+		app: '../app',
+		models: '../models',
+		views: '../views',
+
+		// file paths
+		'underscore': '../libs/underscore',
+		'backbone': '../libs/backbone',
+		'jquery': '../libs/jquery'
+	},
+
+	shim: {
+		'underscore': {
+			exports: '_'
+		},
+		'backbone': {
+			deps: ['underscore', 'jquery'],
+			exports: 'Backbone'
+		}
 	}
 });
 
 var tests = [
-	'tests/app/domOperations' 
+	'tests/models/Message',
+	'tests/views/MessageView'
 ];
 
-require (tests, function(domOperations) {	
-	domOperations.test();
+require (tests, function(Message, MessageView) {
+
+	// Execute tests!
+	Message.test();
+	MessageView.test();
 
 	if (window.mochaPhantomJS) {
 		mochaPhantomJS.run();
