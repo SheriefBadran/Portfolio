@@ -75,10 +75,12 @@ define(['models/Message'], function (Message) {
 				describe('Initialization', function () {
 
 					beforeEach(function () {
+
 						this.message = new Message();
 					});
 
 					it('message model should default message text to an empty string', function () {
+						
 						expect(this.message.get('text')).to.eql('');
 					});
 				});
