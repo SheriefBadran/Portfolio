@@ -1,6 +1,8 @@
 define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Message) {
 'use strict';
 
+	var server = window.socket;
+	console.log(server);
 	var MessageView = Backbone.View.extend({
 
 		tagName: 'section',

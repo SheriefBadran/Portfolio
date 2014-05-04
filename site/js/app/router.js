@@ -25,18 +25,22 @@ function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 		},
 
 		start: function () {
+
 			Backbone.history.start({pushState: true});
 		},
 
 		index: function () {
+
 			console.log('index func is the place for initial fetch from server');
 		},
 
 		show: function () {
+
 			console.log('show function');
 		},
 
 		chat: function () {
+
 			console.log('Chat');
 		},
 
@@ -49,10 +53,12 @@ function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 		},
 
 		memoryGame: function () {
+
 			console.log('MemoryGame');
 		},
 
 		rssFeed: function () {
+			
 			console.log('RssFeed');
 		}
 	}));

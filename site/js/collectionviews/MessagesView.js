@@ -1,16 +1,38 @@
 define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], function (_, Backbone, Message, MessageView) {
 'use strict';
 
+	var server = window.socket;
+
 	var messagesView = Backbone.View.extend({
 
 		className: 'messageWindow',
 
 		initialize: function () {
-			
+
 			this.input = this.$(".messageView");
 			this.initialRender();
 			// this.collection.on('add', this.addItem, this);
 			this.collection.on('reset', this.renderMessages, this);
+
+			// Create a "global" context for the server listener. 
+			var that = this;
+
+			// Callback will have data emitted from the server.			
+			server.on('create', function (data) {
+				console.log(data);
+				// Listen for messages events.
+				// that.broadcastMessage(data);
+				var message = new Message({text: data.text, cid: data.cid});
+				that.collection.add(message);
+				that.addMessage(message);
+			});
+
+			server.on('delete', function (data) {
+
+				console.log(that);
+				var messageModel = that.collection.get(data);
+				messageModel.trigger('destroy', messageModel);				
+			});
 		},
 
 		events: {

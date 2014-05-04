@@ -4,9 +4,16 @@ var application_root = __dirname,
     express = require( 'express' ), //Web framework
     path = require( 'path' ), //Utilities for dealing with file paths
     mongoose = require( 'mongoose' ); //MongoDB integration
+    // var socket = require('socket.io');
 
 //Create server
-var app = express();
+// var app = express();
+// var io = socket.listen(app);
+
+var app = express()
+  , http = require('http')
+  , server = http.createServer(app)
+  , io = require('socket.io').listen(server);
 
 // Configure server
 app.configure( function() {
@@ -26,10 +33,7 @@ app.configure( function() {
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-// Routes
-app.get( '/api', function( request, response ) {
-    response.send( 'Rest API is running.' );
-});
+server.listen(3000);
 
 //Start server
 var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
@@ -44,9 +48,9 @@ app.listen( port, ipaddr, function() {
 });
 
 // Connect to the database
-
 mongoose.connect('mongodb://db_user:frasklas@ds029630.mongolab.com:29630/portfoliodb');
 
+// Verify connection
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
@@ -54,10 +58,60 @@ db.once('open', function callback () {
 });
 
 // Schemas
-var Message = new mongoose.Schema({text: String, date: Date});
+var Message = new mongoose.Schema({text: String, cid: String, date: Date});
 
 // Models
 var MessageModel = mongoose.model('Message', Message);
+
+// Socket.io
+io.sockets.on('connection', function(client){
+    console.log('new client');
+    
+    // Emit the 'messages' event on the client.
+    
+    // Listen for messages events form client.
+    client.on('message:create', function (data) {
+        // received message from client
+        console.log(data);
+        var message = new MessageModel({
+            text: data.text,
+            cid: data.cid,
+            date: data.date
+        });
+        message.save( function( err ) {
+            if( !err ) {
+                return console.log( 'created' );
+            } else {
+                return console.log( err );
+            }
+        });
+        
+        // broadcast back to client.
+        client.broadcast.emit('create', data);
+    });
+
+    client.on('message:delete', function (data) {
+
+        console.log('inside delete callback func');
+        console.log(data);
+
+        return MessageModel.findOne( {cid: data}, function( err, message ) {
+            return message.remove( function( err ) {
+                if( !err ) {
+                    console.log( 'Message removed' );
+                    client.broadcast.emit('delete', data);
+                } else {
+                    console.log( err );
+                }
+            });
+        });
+
+        // broadcast back to client.
+        // client.broadcast.emit('delete', data);
+    });
+});
+
+// ROUTES
 
 // Get a list of all messages
 app.get( '/messages', function( request, response ) {
@@ -72,26 +126,23 @@ app.get( '/messages', function( request, response ) {
         return response.send(messages);
     });
 
-    // return response.send(resp);
-    // return response.send(test);
-    // return response.send({test1: 'hej', test2: 'test', test3: MessageModel.modelName});
 });
 
 // Insert a new message
-app.post( '/messages', function( request, response ) {
-    var message = new MessageModel({
-        text: request.body.text,
-        date: request.body.date
-    });
-    message.save( function( err ) {
-        if( !err ) {
-            return console.log( 'created' );
-        } else {
-            return console.log( err );
-        }
-    });
-    return response.send( message );
-});
+// app.post( '/messages', function( request, response ) {
+//     var message = new MessageModel({
+//         text: request.body.text,
+//         date: request.body.date
+//     });
+//     message.save( function( err ) {
+//         if( !err ) {
+//             return console.log( 'created' );
+//         } else {
+//             return console.log( err );
+//         }
+//     });
+//     return response.send( message );
+// });
 
 // Get a single message by id
 app.get( '/messages/:id', function( request, response ) {
