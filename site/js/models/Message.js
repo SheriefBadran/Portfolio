@@ -7,12 +7,6 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 	var Message = Backbone.Model.extend({
 
-		initialize: function () {
-
-			// Create a "global" context for the server listener. 
-			
-		},
-
 		defaults: function () {
 
 			return {
@@ -24,24 +18,23 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 		urlRoot: '/messages',
 
-		// given for mongo db
+		// Given for mongo db
 		idAttribute: '_id',
 
+		// Flag if message is created on this client or not.
+		thisClient: false,
+
 		deleteMessage: function () {
-			console.log(this);
-
-			// CHECK IF MESSAGE MODEL ALREADY IS LOADED ONCE FROM SERVER AND HAS AN ID OR IF IT IS PURE NEW ONE WITH ONLY CID!!
-			// THIS MIGHT SOLOW  FOUND BUG!
-			// console.log(this.attributes._id);
-
-			//-- this.collection.remove(this) will work on messages collection only! --//
-			// this.collection.remove(this);
 
 			//-- bubble to every collection the model belongs --//
-			var messageModel = this.collection.get(this.cid);
-			messageModel.trigger('destroy', this);
+			var message = this.collection.get(this.cid);
 
+			// Unable delete functionality for messages loaded from database.
+			if (message.hasOwnProperty('id')) {
+				return;
+			};
 
+			message.trigger('destroy', this);
 			server.emit('message:delete', this.cid);
 			// this.destroy();
 		},
@@ -56,6 +49,8 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 			this.set({cid: this.cid});
 			server.emit('message:create', this.toJSON());
+			
+			// TODO: Implement Error Handling.
 			// this.save();
 		}
 	});

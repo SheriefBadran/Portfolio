@@ -10,28 +10,34 @@ define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], functi
 		initialize: function () {
 
 			this.input = this.$(".messageView");
+
 			this.initialRender();
+
 			// this.collection.on('add', this.addItem, this);
 			this.collection.on('reset', this.renderMessages, this);
 
-			// Create a "global" context for the server listener. 
+			// Create a "global" context for the server listeners. 
 			var that = this;
 
+			// SOCKET.IO API
+			// Listening for server create broadcast.
 			// Callback will have data emitted from the server.			
-			server.on('create', function (data) {
-				console.log(data);
-				// Listen for messages events.
-				// that.broadcastMessage(data);
-				var message = new Message({text: data.text, cid: data.cid});
+			server.on('create', function (messageObj) {
+
+				var message = new Message({text: messageObj.text, cid: messageObj.cid});
+
+				// Mark broadcasted message as not created on this client.
+				message.thisClient = false;
+
 				that.collection.add(message);
 				that.addMessage(message);
 			});
 
-			server.on('delete', function (data) {
+			// Listening for server delete broadcast.
+			server.on('delete', function (id) {
 
-				console.log(that);
-				var messageModel = that.collection.get(data);
-				messageModel.trigger('destroy', messageModel);				
+				var message = that.collection.get(id);
+				message.trigger('destroy', message);				
 			});
 		},
 
@@ -44,8 +50,26 @@ define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], functi
 
 		addMessage: function (message) {
 
-			var messageView = new MessageView({model: message});
-			this.$(".messagesArea").append(messageView.render().el);
+			// Messages created on this client are designed different than broadcasted messages. See MessageView.
+
+			if ('thisClient' in message && typeof message.thisClient === 'boolean') {
+
+				var messageView = new MessageView({model: message});				
+
+				if (message.thisClient) {
+
+					this.$(".messagesArea").append(messageView.render().el);
+				};
+
+				if (!message.thisClient) {
+
+					this.$(".messagesArea").append(messageView.renderBroadCast().el);					
+				};
+			}
+			else {
+
+				throw ({message: 'Error! Your message could not be posted to the chat.'});
+			}
 		},
 
 		renderMessages: function () {
@@ -78,8 +102,8 @@ define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], functi
 
 			var message = new Message({text: this.$(".messageView").val()});
 
-			// Save message to server.
-			message.saveMessage();
+			// Mark broadcasted message as created on this client.
+			message.thisClient = true;
 
 			this.collection.add(message);
 
@@ -87,8 +111,19 @@ define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], functi
 			this.$(".messageView").val('');
 			this.$(".messageView").focus();
 
-			// Create a MessageView for the model and render it into the DOM.
-			this.addMessage(message);
+			try {
+
+				// Save message to server.
+				message.saveMessage();			
+
+				// Create a MessageView for the model and render it into the DOM.
+				this.addMessage(message);
+			}
+			catch (err) {
+
+				// TODO: Implement error response to the user.
+				console.log(err.message);
+			}
 		}
 	});
 

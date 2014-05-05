@@ -58,7 +58,7 @@ function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 		},
 
 		rssFeed: function () {
-			
+
 			console.log('RssFeed');
 		}
 	}));
