@@ -27,7 +27,7 @@ require.config({
 
 require (['app/router'], function(PortfolioApp) {
 'use strict';
-
+	
 	PortfolioApp.start();
 
 });
