@@ -68,10 +68,10 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 		},
 
 		template: _.template(
-			'<div class="topBar"><p class="topbarContainer"><span class="deleteIcon"><img src="css/imgs/delete32.png" height=20 width=20 /></span><span class="editIcon"><img src="css/imgs/edit32.png" height=20 width=20 /></span></p></div><div class="text"><%= text %></div><textarea class="edit"><%= text %></textarea><div class="bottomBar"></div>'),
+			'<div class="topBar"><p class="topbarContainer"><span class="deleteIcon"><img src="css/imgs/delete32.png" height=20 width=20 /></span><span class="editIcon"><img src="css/imgs/edit32.png" height=20 width=20 /></span></p></div><div class="text"><%= text %></div><textarea class="edit"><%= text %></textarea><div class="bottomBar"><hr class="carved" /></div>'),
 
 		broadCastTemplate: _.template(
-			'<div class="topBar"><p class="topbarContainer"></p></div><div class="text"><%= text %></div><textarea class="edit"><%= text %></textarea><div class="bottomBar"></div>')
+			'<div class="topBar"><p class="topbarContainer"></p></div><div class="text"><%= text %></div><textarea class="edit"><%= text %></textarea><div class="bottomBar"><hr class="carved" /></div>')
 
 	});
 
