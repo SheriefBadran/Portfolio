@@ -7,21 +7,21 @@ define([
 function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 'use strict';
 	
+	// Private variables.
+	// Document is cashed and retrieved once for each time the module is used.
+	var doc = document;
+	
 	var PortfolioApp = new (Backbone.Router.extend({
 
 		routes: {
 			'': 'index',
 			// 'rss': 'rssFeed',
-			'messages': 'loadMessages'
+			'chat': 'loadMessages'
 		},
 
 		initialize: function () {
+			
 
-			// Retrieve rendered html for the menu board.
-			var menuBoard = InitMenuBoard();
-
-			// Inject the rendered HTML into the DOM.
-			$('#menuBoard').html(menuBoard.HTML);
 		},
 
 		start: function () {
@@ -31,7 +31,21 @@ function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 
 		index: function () {
 
-			console.log('index func is the place for initial fetch from server');
+			var chat = doc.querySelector('.messageWindow');
+
+			// If user returns to start page, remove the chat from dom.
+			// Chat can only contain null or an element, null comparison ok.
+			if (chat !== null) { chat.remove(); };
+
+			// Retrieve rendered html for the menu board.
+			var menuBoard = InitMenuBoard();
+
+			// Set a timeout for timing with the css3 page loader.
+			setTimeout(function () {
+
+				// Inject the rendered HTML into the DOM.
+				$('#menuBoard').html(menuBoard.HTML);
+			}, 1600);
 		},
 
 		show: function () {
@@ -39,17 +53,18 @@ function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 			console.log('show function');
 		},
 
-		chat: function () {
-
-			console.log('Chat');
-		},
-
 		loadMessages: function () {
 			
 			var messageWindow = InitMessageWindow();
-			$('body').append(messageWindow.HTML);
-
 			messageWindow.messages.fetch({reset: true});
+
+			var chat = messageWindow.HTML.$el;
+
+			chat.hide();
+			$('body').append(chat);
+			chat.slideDown(1000);
+
+			// messageWindow.messages.fetch({reset: true});
 		},
 
 		memoryGame: function () {

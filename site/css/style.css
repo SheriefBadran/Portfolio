@@ -1,3 +1,10 @@
+/* Mobile First */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
 /*ul.thumb li hover .mask {
 	-webkit-transform:scale(1.1);
 }
@@ -29,7 +36,222 @@
 	z-index: 990;
 }*/
 
-#menuBoard ul li {
+body {
+	width: 100%;
+	background-color: #202024;
+}
+
+html {
+	with: 100%;
+}
+
+#borderTop {
+	position: relative;
+	height: 5px;
+	z-index: 9999;
+	background-color: #ffa273;
+}
+
+.loader {
+	-webkit-animation-duration: 1.8s;
+	-moz-animation-duration: 1.8s;
+	-ms-animation-duration: 1.8s;
+	-o-animation-duration: 1.8s;
+	animation-duration: 1.8s;
+	-webkit-animation-name: loader;
+	-moz-animation-name: loader;
+	-ms-animation-name: loader;
+	-o-animation-name: loader;
+	animation-name: loader;
+}
+
+header {
+	width: 100%;
+	height: 100px;
+	background-color: #202024;
+}
+
+.heading {
+	width: 100%;
+}
+
+#portfolioHeadingSection {
+	border-top: 5px solid #2A2A31;
+	border-bottom: 5px solid #2A2A31;
+}
+
+.navHeading {
+	position: relative;
+	height: 50px;
+	width: 100%;
+	background-color: #202024;
+
+}
+
+.navHeading p {
+	font: bold 1em "Orbitron-Light", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+	letter-spacing: 1px;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.heading h1 {
+	font: bold 4em "Orbitron-Light", Arial, sans-serif;
+	position: relative;
+	margin: 0;
+	color: #fff;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+/*#menuBoard {
+	width: 100%;
+	min-width: 180px;
+	margin: 0 auto;
+	overflow: auto;
+}
+
+#menuBoard ul {
+	width: 90%;
+	/* In combination with display: inline-block; on menuBoard ul li the line below replaces of float: left for li elements; */
+/*	text-align: center;
+	margin: 0 auto;
+	border-top: 5px solid #2A2A31;
+	border-bottom: 5px solid #2A2A31;
+	overflow: auto;
+}*/
+
+/*#menuBoard ul li {*/
+	/* In combination with text-align: center; on menuBoard ul the line below replaces of float: left; */
+	/*display: inline-block;*/
+	/*float: left;*/
+/*	list-style-type: none;
+	background-color: #202024;
+	border-bottom: 1px solid #2A2A31;
+	padding: 1%;
+	width: 100px;
+}*/
+
+main {
+	width: 100%;
+	overflow: auto;
+}
+
+#portfolioSection{
+	width: 100%;
+	overflow: auto;
+	border-bottom: 5px solid #2A2A31;
+}
+
+#menuBoard {
+	float: left;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+#menuBoard ul {
+	clear: left;
 	float: left;
 	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	left: 50%;
+	text-align: center;
+}
+
+#menuBoard ul li {
+   display: block;
+   float: left;
+   list-style: none;
+   margin: 0;
+   padding: 0%;
+   position: relative;
+   right: 50%;
+   width: 120px;
+}
+
+img {
+	display: block;
+	margin: auto auto;
+}
+
+.clear: {
+	clear: both;
+}
+
+@-webkit-keyframes loader {
+	from {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: transparent;
+		width: 0;
+	}
+	50% {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: #ffa273;
+		width: 50%;
+	}
+	to {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: #ffa273;
+		width: 100%;
+	}
+}
+
+@-moz-keyframes loader {
+	from {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: transparent;
+		width: 0;
+	}
+	50% {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: #ffa273;
+		width: 50%;
+	}
+	to {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: #ffa273;
+		width: 100%;
+	}
+}
+
+@keyframes loader {
+	from {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: transparent;
+		width: 0;
+	}
+	50% {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: #ffa273;
+		width: 50%;
+	}
+	to {
+		position: relative;
+		height: 5px;
+		z-index: 9999;
+		background-color: #ffa273;
+		width: 100%;
+	}
 }

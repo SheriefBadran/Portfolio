@@ -18,7 +18,7 @@ function (Messages, MessagesView, MessageView) {
 		messagesView.render();
 
 		return {
-			HTML: messagesView.el,
+			HTML: messagesView,
 			messages: messages
 		};
 	};

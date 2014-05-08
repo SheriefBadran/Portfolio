@@ -22,14 +22,14 @@ define ([
 			return this;
 		},
 
-		template: _.template('<a href="#"><div class="thumbContainer"><div class="mask"></div><img id="<%= itemTitle %>" src="<%= imgSrc %>" width=100 height=100 /></div></a>'),
+		template: _.template('<a href=""><div class="thumbContainer"><div class="mask"></div><img id="<%= itemTitle %>" src="<%= imgSrc %>" width=100 height=100 /></div></a>'),
 
 		events: {
 			'click img': 'navigateOnClick',
 		},
 
 		navigateOnClick: function (e) {
-
+			e.preventDefault();
 			var target = e.target;
 			console.log(target.id);
 			var collection;
@@ -37,7 +37,7 @@ define ([
 			if (typeof target.id === 'string' && target.id === 'Chat') {
 				
 				// IF I KEEP IT LIKE THIS - REMOVE THIS MODULE DEPENDENCY InitMessageWindow.
-				Backbone.history.navigate("messages", {trigger: true});
+				Backbone.history.navigate("chat", {trigger: true});
 			};
 
 			if (typeof target.id === 'string' && target.id === 'Memory Game') {
