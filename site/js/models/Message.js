@@ -1,6 +1,13 @@
 define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 'use strict';
 
+	console.log('outer test');
+	if (typeof io === 'undefined') {
+		console.log('test');
+		io = require('socketio');
+		console.log(io);
+	}
+
 	window.socket = io.connect('http://localhost:3000');
 	var server = window.socket;
 
