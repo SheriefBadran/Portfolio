@@ -1,8 +1,12 @@
-define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], function (_, Backbone, Message, MessageView) {
+define(['underscore',
+		'backbone',
+		'models/Message', 
+		'views/MessageView',
+		'text!templates/messagesView.html'], 
+function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 'use strict';
 
 	var server = window.socket;
-
 	var messagesView = Backbone.View.extend({
 
 		className: 'messageWindow',
@@ -46,7 +50,7 @@ define(['underscore', 'backbone', 'models/Message', 'views/MessageView'], functi
 			'keypress .messageView': 'submitOnEnter'
 		},
 
-		template: _.template('<div class="messagesArea"></div><textarea class="messageView" placeholder="Type a message"></textarea><input class="send" type="submit" />'),
+		template: _.template(messagesViewTemplate),
 
 		addMessage: function (message) {
 

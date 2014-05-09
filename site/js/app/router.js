@@ -62,7 +62,7 @@ function (_, Backbone, InitMenuBoard, InitMessageWindow) {
 
 			chat.hide();
 			$('body').append(chat);
-			chat.slideDown(1000);
+			chat.fadeIn(1000);
 
 			// messageWindow.messages.fetch({reset: true});
 		},

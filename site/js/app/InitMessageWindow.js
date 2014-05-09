@@ -1,7 +1,6 @@
-define([
-			'collections/Messages', 
-			'collectionviews/MessagesView',
-			'views/MessageView'
+define(['collections/Messages', 
+		'collectionviews/MessagesView',
+		'views/MessageView'
 ], 
 function (Messages, MessagesView, MessageView) {
 'use strict';

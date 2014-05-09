@@ -4,6 +4,7 @@
 }
 
 .messageWindow {
+	position: relative;
 	display: block;
 	border: 1px solid #000;
 	min-width: 320px;
@@ -11,20 +12,41 @@
 	height: 300px;
 	margin: 0 auto;
 	clear: both;
-	overflow-x: hidden;
-	overflow-y: scroll;
+/*	overflow-x: hidden;
+	overflow-y: scroll;*/
+}
+
+#chatHeader {
+	position: absolute;
+	background-image: -moz-linear-gradient(90deg, rgb(25,35,40), rgb(20,20,24));
+	background-image: -webkit-linear-gradient(90deg, rgb(25,35,40), rgb(20,20,24));
+	/*background-image: -o-linear-gradient(90deg, rgb(0,0,0), rgb(70,70,70));
+	background-image: linear-gradient(90deg, rgb(0,0,0), rgb(70,70,70));*/
+	width: 100%;
+	height: 60px;
+	top: 0;
+	left: 0;
+}
+
+#chatHeader p {
+	color: #fff;
+	font-family: "Helvetica Neue";
+	text-align: center;
+	margin-top: 20px;
 }
 
 .topBar {
 	position: relative;
-	background-color: #E7C7A7;
+	background-color: #654634;
 /*	-webkit-border-radius: 0 20px 0 0;
 	-o-border-radius: 0 20px 0 0;
 	-ms-border-radius:  0 20px 0 0;
 	border-radius: 0 20px 0 0;*/
 	/*background-image: -o-linear-gradient(90deg, rgb(0,0,0), rgb(70,70,70));
 	background-image: linear-gradient(90deg, rgb(0,0,0), rgb(70,70,70));*/
-	border-bottom: 1px solid #000;
+
+
+	/*border-bottom: 1px solid #000;*/
 	width: 100%;
 	height: 30px;
 	display: block;
@@ -43,7 +65,7 @@
 	width: 100%; 
 	height: 2px;
 	border: none; 
-	background: #E7C7A7;
+	background: #654634;
 	background-image: -webkit-gradient(
 		linear,
 		left top,
@@ -58,22 +80,25 @@
 	);
 }
 
-hr.carved {
-
-}
-
 .messagesArea {
 	width: 100%;
-	background-color: #fff;
+	margin-top: 60px;
+	background-color: #192328;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	margin-bottom: 20px;
 }
 
 section.message {
 	position: relative;
 	min-width: 300px;
-	width: 100%;
-	height: 110px;
+	width: 97%;
+	height: auto;
 	margin: 0 auto;
-	background-color: #E7C7A7;
+	background-color: #654634;
+	overflow: auto;
+	border-left: 1% solid #192328;
+	border-right: 1% solid #192328;
 
 /*	-webkit-border-radius: 0 20px 20px 20px;
 	-o-border-radius: 0px 20px 20px 20px;
@@ -83,9 +108,10 @@ section.message {
 
 .text {
 	display: block;
-	padding: 10px 0 0 10px;
+	padding: 10px 0 20px 10px;
 	font-family: "Helvetica Neue", Arial;
-	font-size: 1.2em;
+	font-size: 1.5em;
+	color: #fff;
 }
 
 /* p tag it self is a container within the top bar. */
@@ -104,6 +130,11 @@ p .editIcon {
   top: 9px;
   right: 42px;
 }
+
+/*#messageInput {
+	position: absolute;
+	bottom : 0;
+}*/
 
 .messageView {
 	width: 75%;

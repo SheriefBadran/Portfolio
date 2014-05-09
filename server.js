@@ -113,6 +113,10 @@ io.sockets.on('connection', function(client){
 
 // ROUTES
 
+app.get('/chat', function(request, response) {
+	response.sendfile(__dirname+'/site/index.html');
+});
+
 // Get a list of all messages
 app.get( '/messages', function( request, response ) {
 

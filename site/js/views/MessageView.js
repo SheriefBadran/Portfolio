@@ -1,6 +1,11 @@
-define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Message) {
+define(['underscore', 
+		'backbone',
+		'models/Message',
+		'text!templates/message.html', 
+		'text!templates/messageBroadCast.html'], 
+function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate) {
 'use strict';
-
+	
 	var MessageView = Backbone.View.extend({
 
 		tagName: 'section',
@@ -67,11 +72,9 @@ define(['underscore', 'backbone', 'models/Message'], function (_, Backbone, Mess
 			console.log(value);
 		},
 
-		template: _.template(
-			'<div class="topBar"><p class="topbarContainer"><span class="deleteIcon"><img src="css/imgs/delete32.png" height=20 width=20 /></span><span class="editIcon"><img src="css/imgs/edit32.png" height=20 width=20 /></span></p></div><div class="text"><%= text %></div><textarea class="edit"><%= text %></textarea><div class="bottomBar"><hr class="carved" /></div>'),
+		template: _.template(messageTemplate),
 
-		broadCastTemplate: _.template(
-			'<div class="topBar"><p class="topbarContainer"></p></div><div class="text"><%= text %></div><textarea class="edit"><%= text %></textarea><div class="bottomBar"><hr class="carved" /></div>')
+		broadCastTemplate: _.template(messageBroadCastTemplate)
 
 	});
 
