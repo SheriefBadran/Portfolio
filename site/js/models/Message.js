@@ -20,8 +20,6 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 			}
 		},
 
-		urlRoot: '/messages',
-
 		// Given for mongo db
 		idAttribute: '_id',
 
