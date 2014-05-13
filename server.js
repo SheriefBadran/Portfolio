@@ -59,9 +59,11 @@ db.once('open', function callback () {
 
 // Schemas
 var Message = new mongoose.Schema({text: String, cid: String, date: Date});
+var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, date: String, webpage: String});
 
 // Models
 var MessageModel = mongoose.model('Message', Message);
+var ContactMessageModel = mongoose.model('ContactMessage', ContactMessage);
 
 // Socket.io
 io.sockets.on('connection', function(client){
@@ -117,6 +119,10 @@ app.get('/chat', function(request, response) {
 	response.sendfile(__dirname+'/site/index.html');
 });
 
+app.get('/contact', function (request, response) {
+    response.sendfile(__dirname+'/site/index.html');
+});
+
 // Get a list of all messages
 app.get( '/messages', function( request, response ) {
 
@@ -147,6 +153,29 @@ app.get( '/messages', function( request, response ) {
 //     });
 //     return response.send( message );
 // });
+
+app.post('/form', function (request, response) {
+   
+   var contactMessage = new ContactMessageModel({
+
+        firstname: request.body.firstname,
+        surname: request.body.surname,
+        email: request.body.email,
+        date: request.body.date,
+        webpage: request.body.webpage
+   });
+
+   contactMessage.save(function (err) {
+       
+       if (!err) {
+
+            return console.log('created');
+       } else {
+            return console.log(err);
+       }
+   });
+   return response.send(contactMessage);
+});
 
 // Get a single message by id
 app.get( '/messages/:id', function( request, response ) {

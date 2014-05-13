@@ -1,7 +1,7 @@
-define(['collections/BoardItemList'], function (BoardItemList) {
+define(['collections/BoardItemList', 'collections/MenuItemList'], function (BoardItemList, MenuItemList) {
 	
 	return {
-		getCollectionSet: function() {
+		getBoardCollectionSet: function() {
 
 			var boardItems = [
 				{itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png', cathegory: 'entertainment'},
@@ -18,8 +18,20 @@ define(['collections/BoardItemList'], function (BoardItemList) {
 			};
 		},
 
-		getMenuItems: function () {
+		getMenuCollectionSet: function () {
 			
+			var menuItems = [
+				{itemTitle: 'My Work'},
+				{itemTitle: 'Say Hello'},
+				{itemTitle: 'About This App'}
+			];
+
+			var menuItemList = new MenuItemList();
+
+			return {
+				menuItems: menuItems,
+				menuItemList: menuItemList
+			};
 		}
 	};
 })
