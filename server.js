@@ -10,10 +10,7 @@ var application_root = __dirname,
 // var app = express();
 // var io = socket.listen(app);
 
-var app = express()
-  , http = require('http')
-  , server = http.createServer(app)
-  , io = require('socket.io').listen(server);
+var app = express();
 
 // Configure server
 app.configure( function() {
@@ -33,19 +30,22 @@ app.configure( function() {
     app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-server.listen(3000);
+// server.listen(3000);
 
 //Start server
 var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-var port    = parseInt(process.env.OPENSHIFT_NODEJS_PORT) || 8080;
+var port    = parseInt(process.env.OPENSHIFT_NODEJS_PORT) || 8000;
 
 app.set('ipaddr', ipaddr);
 app.set('port', port);
 
-app.listen( port, ipaddr, function() {
+var server = app.listen( port, ipaddr, function() {
     console.log( 'Express server listening on port %d in %s mode', 
     port, app.settings.env );
 });
+
+
+var io = require('socket.io').listen(server);
 
 // Connect to the database
 mongoose.connect('mongodb://db_user:frasklas@ds029630.mongolab.com:29630/portfoliodb');

@@ -6,7 +6,7 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 		io = require('socketio');
 	}
 
-	window.socket = io.connect('http://localhost:3000');
+	window.socket = io.connect('http://localhost:8000');
 	var server = window.socket;
 
 	var Message = Backbone.Model.extend({
