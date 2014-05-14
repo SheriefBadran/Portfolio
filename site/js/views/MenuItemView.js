@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'text!template/menuItem.html'], function (_, Backbone, menuItemTemplate) {
+define(['underscore', 'backbone', 'text!templates/menuItem.html'], function (_, Backbone, menuItemTemplate) {
 'use strict';
 	
 	var MenuItemView = Backbone.View.extend({
@@ -16,14 +16,21 @@ define(['underscore', 'backbone', 'text!template/menuItem.html'], function (_, B
 			return this;
 		},
 
-		template: _.(menuItemTemplate),
+		template: _.template(menuItemTemplate),
 
 		events: {
-
+			'click a': 'navigateOnClick'
 		},
 
-		navigateOnClick: function () {
+		navigateOnClick: function (e) {
 			
+			e.preventDefault();
+			var menuChoice = this.model.get('itemTitle');
+
+			if (typeof menuChoice === 'string' && menuChoice === 'Say Hello') {
+
+				Backbone.history.navigate("/contact", {trigger: true});
+			}
 		}
 	});
 
