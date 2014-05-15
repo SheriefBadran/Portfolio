@@ -107,39 +107,44 @@ header {
 	text-align: center;
 }
 
-/*#menuBoard {
+#portfolioBoard {
 	width: 100%;
 	min-width: 180px;
 	margin: 0 auto;
 	overflow: auto;
 }
 
-#menuBoard ul {
-	width: 90%;
-	/* In combination with display: inline-block; on menuBoard ul li the line below replaces of float: left for li elements; */
-/*	text-align: center;
+#portfolioMenu {
+	width: 100%;
 	margin: 0 auto;
-	border-top: 5px solid #2A2A31;
-	border-bottom: 5px solid #2A2A31;
-	overflow: auto;
-}*/
+}
 
-/*#menuBoard ul li {*/
+#portfolioMenu ul {
+	width: 100%;
+	/* In combination with display: inline-block; on menuBoard ul li the line below replaces of float: left for li elements; */
+	text-align: center;
+	/*margin: 0 auto;*/
+/*	border-top: 5px solid #2A2A31;
+	border-bottom: 5px solid #2A2A31;*/
+	/*overflow: auto;*/
+}
+
+#portfolioMenu ul li {
 	/* In combination with text-align: center; on menuBoard ul the line below replaces of float: left; */
-	/*display: inline-block;*/
+	display: inline-block;
 	/*float: left;*/
-/*	list-style-type: none;
+	list-style-type: none;
 	background-color: #202024;
-	border-bottom: 1px solid #2A2A31;
+	/*border-bottom: 1px solid #2A2A31;*/
 	padding: 1%;
 	width: 100px;
-}*/
+}
 
 main {
 	width: 100%;
 }
 
-#portfolioBoard {
+/*#portfolioBoard {
 	width: 100%;
 	overflow: auto;
 	border-bottom: 5px solid #2A2A31;
@@ -172,7 +177,7 @@ main {
    position: relative;
    right: 50%;
    width: 120px;
-}
+}*/
 
 #portfolioAppsContent {
 	width: 100%;

@@ -24,6 +24,7 @@ input[type=submit] {
 	height: 50px;
 	width: 100%;
 	border: none;
+	border-radius: 0;
 	font-weight: 400;
 	font-style: italic;
 	letter-spacing: 2px;
