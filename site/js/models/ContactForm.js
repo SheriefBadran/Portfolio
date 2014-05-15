@@ -3,6 +3,7 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 	
 	var ContactForm = Backbone.Model.extend({
 
+		// Add company and coment.
 		defaults: function () {
 			return {
 				firstname: '',
