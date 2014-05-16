@@ -1,4 +1,4 @@
-// Concider more to be handled within the views. If possible let views comunicate with
+// Consider more to be handled within the views. If possible let views comunicate with
 // separate modules to achieve the same things. Look at index and loadMessages and ask what
 // can be done from within the views.
 // Clean up this router!
