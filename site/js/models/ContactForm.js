@@ -18,6 +18,31 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 
 		id_Attribute: '_id',
 
+		validateName: function (value) {
+			
+			if (value === null || value === '') {
+
+				return false;
+			};
+
+			return true;
+		},
+
+		validateEmail: function (value) {
+			
+
+		},
+
+		validateDate: function (value) {
+			
+
+		},
+
+		validateWebAdress: function (value) {
+			
+
+		},
+
 		saveFormData: function (formData) {
 			
 			this.set({
@@ -28,15 +53,8 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 				webpage: formData.webpage
 			});
 
-			console.log(this);
-
-			// this.set('firstname': formData.firstname);
-			// this.set('surname': formData.surname);
-			// this.set('email': formData.email);
-			// this.set('date': formData.date);
-
 			this.save();
-		}		
+		}	
 	});
 
 	return ContactForm;

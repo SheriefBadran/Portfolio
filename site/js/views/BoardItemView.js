@@ -3,8 +3,9 @@ define ([
 		'backbone', 
 		'models/Board', 
 		'text!templates/test_temp.html',
-		'app/InitMessageWindow'
-], function (_, Backbone, BoardItem, MenuItemHTML, InitMessageWindow) {
+		'app/InitMessageWindow',
+		'text!templates/boardItem.html'
+], function (_, Backbone, BoardItem, MenuItemHTML, InitMessageWindow, BoardItemTemplate) {
 'use strict';
 
 	var BoardItemView = Backbone.View.extend({
@@ -22,7 +23,7 @@ define ([
 			return this;
 		},
 
-		template: _.template('<a href=""><div class="thumbContainer"><div class="mask"></div><img id="<%= itemTitle %>" src="<%= imgSrc %>" width=100 height=100 /></div></a>'),
+		template: _.template(BoardItemTemplate),
 
 		events: {
 			'click img': 'navigateOnClick',
@@ -32,6 +33,7 @@ define ([
 			e.preventDefault();
 			var target = e.target;
 			console.log(target.id);
+			console.log(target);
 			var collection;
 
 			if (typeof target.id === 'string' && target.id === 'Chat') {

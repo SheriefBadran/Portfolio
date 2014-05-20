@@ -1,4 +1,8 @@
-define(['underscore', 'backbone', 'views/MenuItemView', 'text!templates/menu.html'], function (_, Backbone, MenuItemView, MenuTemplate) {
+define(['underscore',
+		'backbone',
+		'views/MenuItemView',
+		'text!templates/menu.html'], 
+function (_, Backbone, MenuItemView, MenuTemplate) {
 'use strict';
 
 	var MenuItemListView = Backbone.View.extend({
@@ -7,12 +11,8 @@ define(['underscore', 'backbone', 'views/MenuItemView', 'text!templates/menu.htm
 
 		id: 'menuBoard',
 
-		events: {
-			'click p': 'menuToggle'
-		},
-
 		initialize: function () {
-			this.collection.on('add', this.addItem, this);
+			// this.collection.on('add', this.addItem, this);
 			this.$el.html(this.template());
 		},
 
@@ -31,12 +31,23 @@ define(['underscore', 'backbone', 'views/MenuItemView', 'text!templates/menu.htm
 			return this;
 		},
 
-		menuToggle: function () {
+		toggleMenu: function (menuBoard) {
 
-			var menu = this.$el.find('#menu');
-			menu.animate({
-				height:'toggle'
-			});
+			if (typeof menuBoard === 'object' && menuBoard.length && menuBoard instanceof jQuery) {
+
+				if (menuBoard.hasClass('toggleDown')) {
+
+					menuBoard.removeClass('toggleDown')
+					menuBoard.addClass('toggleUp');
+					menuBoard.removeClass('keepDown');
+				}
+				else {
+
+					menuBoard.removeClass('toggleUp');
+					menuBoard.addClass('toggleDown');
+					menuBoard.addClass('keepDown');
+				}
+			};
 		}
 	});
 

@@ -35,7 +35,9 @@
 
 .topBar {
 	position: relative;
-	background-color: #654634;
+	/*background-color: #872277;*/
+	/*background-color: #04376C;*/
+	background-color: #332E2D;
 /*	-webkit-border-radius: 0 20px 0 0;
 	-o-border-radius: 0 20px 0 0;
 	-ms-border-radius:  0 20px 0 0;
@@ -93,7 +95,11 @@ section.message {
 	width: 97%;
 	height: auto;
 	margin: 0 auto;
-	background-color: #654634;
+	/*background-color: #654634;*/
+	/*background-color: #750062;*/
+	/*background-color: #04376C;*/
+	background-color: #332E2D;
+	/*background-color: #872277;*/
 	overflow: auto;
 	border-left: 1% solid #192328;
 	border-right: 1% solid #192328;

@@ -5,7 +5,7 @@ define(['collections/BoardItemList', 'collections/MenuItemList'], function (Boar
 
 			var boardItems = [
 				{itemTitle: 'Chat', imgSrc: 'css/imgs/chat.png', cathegory: 'entertainment'},
-				{itemTitle: 'Memory Game', imgSrc: 'css/imgs/rss.png', cathegory: 'entertainment'},
+				{itemTitle: 'Memory Game', imgSrc: 'css/imgs/memorygame.png', cathegory: 'entertainment'},
 				{itemTitle: 'Rss Feeds', imgSrc: 'css/imgs/rss.png', cathegory: 'news'}
 			];
 

@@ -5,37 +5,6 @@
 	padding: 0;
 }
 
-/*ul.thumb li hover .mask {
-	-webkit-transform:scale(1.1);
-}
-
-.thumbContainer {
-	width: 273px;
-	height: 293px;
-	display: block;
-	overflow: hidden;
-}
-
-.mask {
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	poistion: absolute;
-	left: 0;
-	top: 0;
-	width: 273px;
-	height: 293px;
-	z-index: 999;
-}
-
-.thumbContainer img {
-	position: absolute;
-	left: 1px;
-	top: 1px;
-	width: 271px;
-	height: 291px;
-	z-index: 990;
-}*/
-
 body {
 	width: 100%;
 	background-color: #202024;
@@ -43,6 +12,10 @@ body {
 
 html {
 	with: 100%;
+}
+
+#container {
+	position: relative;
 }
 
 #borderTop {
@@ -78,6 +51,10 @@ header {
 #portfolioHeading {
 	border-top: 5px solid #2A2A31;
 	border-bottom: 5px solid #2A2A31;
+}
+
+#menuIcon {
+	margin-left: 15px;
 }
 
 .navHeading {
@@ -140,57 +117,64 @@ header {
 	width: 100px;
 }
 
+#portfolioMenu ul li p {
+	color: #fff;
+	font: 0.9em "Orbitron-Light", Arial, sans-serif;
+}
+
 main {
 	width: 100%;
 }
-
-/*#portfolioBoard {
-	width: 100%;
-	overflow: auto;
-	border-bottom: 5px solid #2A2A31;
-}
-
-#portfolioMenu {
-	float: left;
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-}
-
-#portfolioMenu ul {
-	clear: left;
-	float: left;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	position: relative;
-	left: 50%;
-	text-align: center;
-}
-
-#portfolioMenu ul li {
-   display: block;
-   float: left;
-   list-style: none;
-   margin: 0;
-   padding: 0%;
-   position: relative;
-   right: 50%;
-   width: 120px;
-}*/
 
 #portfolioAppsContent {
 	width: 100%;
 }
 
-img {
+img .appIcon {
 	display: block;
 	margin: auto auto;
 }
 
 #menuBoard {
-	width: 100%;
+	position: absolute;
+	top: 79px;
+	left: 0;
+	z-index: 9999;
+	width: 0%;
+	background-color: #202024;
+	opacity: 0.97;
 	border-bottom: 5px solid #2A2A31;
+	overflow: hidden;
+}
+
+#menuBoard.keepDown {
+	width: 100%;
+}
+
+.toggleDown {
+	-webkit-animation-duration: 1.0s;
+	-moz-animation-duration: 1.0s;
+	-ms-animation-duration: 1.0s;
+	-o-animation-duration: 1.0s;
+	animation-duration: 1.0s;
+	-webkit-animation-name: show;
+	-moz-animation-name: show;
+	-ms-animation-name: show;
+	-o-animation-name: show;
+	animation-name: show;
+}
+
+.toggleUp {
+	-webkit-animation-duration: 1.0s;
+	-moz-animation-duration: 1.0s;
+	-ms-animation-duration: 1.0s;
+	-o-animation-duration: 1.0s;
+	animation-duration: 1.0s;
+	-webkit-animation-name: hide;
+	-moz-animation-name: hide;
+	-ms-animation-name: hide;
+	-o-animation-name: hide;
+	animation-name: hide;
 }
 
 #menuBoard p {
@@ -198,15 +182,6 @@ img {
 	font: bold 1em "Orbitron-Light", Arial, sans-serif;
 	margin-left: 25%;
 }
-
-/*#menu {
-	width: 100%;
-	height: 50px;
-}
-
-#menu ul {
-	width: 100%;
-}*/
 
 #menu ul li {
 	/* overrride the display: block to display: inline-block on wider screen */
@@ -226,23 +201,6 @@ img {
 	font: bold 1em "Orbitron-Light", Arial, sans-serif;
 	text-decoration: none;
 }
-
-/*.clearfix:after {
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;
-}
-
-.clearfix {
-	display: inline-block;
-}*/
-
-/* Hides from IE-mac */
-/** html .clearfix {height: 1%;}
-.clearfix {display: block;}*/
-/* End hide from IE-mac */
 
 @-webkit-keyframes loader {
 	from {
@@ -314,4 +272,88 @@ img {
 		background-color: #ffa273;
 		width: 100%;
 	}
+}
+
+@-webkit-keyframes show {
+	from {
+		height: 0px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+		overflow: hidden;
+	}
+	to {
+		height: 160px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+	}
+}
+
+@-moz-keyframes show {
+	from {
+		height: 0px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+		overflow: hidden;
+	}
+	to {
+		height: 160px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+	}
+}
+
+@-ms-keyframes show {
+	from {
+		height: 0px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+		overflow: hidden;
+	}
+	to {
+		height: 160px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+	}	
+}
+
+@-webkit-keyframes hide {
+	from {
+		height: 160px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+		overflow: hidden;
+	}
+	to {
+		height: 0px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+	}
+}
+
+@-moz-keyframes hide {
+	from {
+		height: 160px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+		overflow: hidden;
+	}
+	to {
+		height: 0px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+	}
+}
+
+@-ms-keyframes hide {
+	from {
+		height: 0px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+		overflow: hidden;
+	}
+	to {
+		height: 160px;
+		width: 100%;
+		border-bottom: 5px solid #2A2A31;
+	}	
 }

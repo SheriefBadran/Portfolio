@@ -3,7 +3,6 @@
 // can be done from within the views.
 // Clean up this router!
 
-
 define(['underscore', 
 		'backbone',
 		'app/Factory',
@@ -13,9 +12,11 @@ define(['underscore',
 		'collections/Messages',
 		'collectionviews/MessagesView',
 		'models/ContactForm',
-		'views/ContactFormView'
-], 
-function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemListView, Messages, MessagesView, ContactForm, ContactFormView) {
+		'views/ContactFormView',
+		'app/RenderCoreHTML',
+		'app/RenderHTML'
+],
+function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemListView, Messages, MessagesView, ContactForm, ContactFormView, RenderCoreHTML, RenderHTML) {
 'use strict';
 	
 	// Private variables.
@@ -26,13 +27,14 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 		routes: {
 			'': 'index',
-			// 'rss': 'rssFeed',
 			'chat': 'loadMessages',
 			'contact': 'loadContactForm'
 		},
 
 		initialize: function () {
-			
+
+			RenderCoreHTML.renderHeader();
+			RenderCoreHTML.renderMain();
 		},
 
 		start: function () {
@@ -43,7 +45,6 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 		index: function () {
 
 			var chat = doc.querySelector('.messageWindow');
-			var menuWrapper = doc.querySelector('#menu');
 			var contactFormWrapper = $('#contactForm');
 
 			// If user returns to start page, remove the chat from dom...
@@ -57,46 +58,17 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 				});
 			};
 
-			// Retrieve an object literal with boardItem models and a boardItemList Collection.
-			var boardCollectionSet = Factory.getBoardCollectionSet();
-
 			try {
 
-				// Retrieve rendered html for the menu board.
-				var portfolioMenu = InitCollectionView(boardCollectionSet.boardItems, boardCollectionSet.boardItemList, BoardItemListView);
+				// Render the portfolio menu board.
+				RenderHTML.renderCollectionView('BoardItemListView', $('#portfolioMenu'));
+
+				// Render the menu.
+				RenderHTML.renderCollectionView('MenuItemListView', $('#container'));
 			}
 			catch (e) {
 
 				console.log(e.message);
-			}
-
-			// Set a timeout for timing with the css3 page loader.
-			setTimeout(function () {
-
-				// Inject the rendered HTML into the DOM.
-				$('#portfolioMenu').html(portfolioMenu.HTML.el);
-			}, 1600);
-
-			// Render menu if it doesn't exit.
-			if (menuWrapper === null) {
-				// Retrieve rendered html for the general menu.
-				var menuCollectionSet = Factory.getMenuCollectionSet();
-
-				try {
-
-					var menu = InitCollectionView(menuCollectionSet.menuItems, menuCollectionSet.menuItemList, MenuItemListView);
-				}
-				catch (e) {
-
-					console.log(e.message);
-				}
-
-				console.log(menu.HTML.$el);
-
-				setTimeout(function () {
-					
-					$('main').append(menu.HTML.$el);
-				}, 1900);
 			}
 		},
 

@@ -41,3 +41,16 @@ h2 {
 	text-align: center;
 	margin: 0 0 5px 0;
 }
+
+input.invalid + .errorMsg {
+	display: block;
+}
+
+.errorMsg {
+	color: red;
+	display: none;
+}
+
+input.invalid {
+	border: 1px solid red;
+}
