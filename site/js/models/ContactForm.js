@@ -1,6 +1,6 @@
-define(['underscore', 'backbone'], function (_, Backbone) {
+define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Validator) {
 'use strict';
-	
+
 	var ContactForm = Backbone.Model.extend({
 
 		// Add company and coment.
@@ -18,28 +18,53 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 
 		id_Attribute: '_id',
 
-		validateName: function (value) {
+		validate: function (attributes, options) {
 			
-			if (value === null || value === '') {
-
-				return false;
+			var data = {
+				firstname: attributes.firstname,
+				surname: attributes.surname,
+				email: attributes.email,
+				webaddress: attributes.webaddress
 			};
 
-			return true;
+			Validator.config = {
+				firstname: 'firstname',
+				surname: 'surname',
+				email: 'email',
+				webaddress: 'webaddress'
+			};
+
+			var validated = Validator.validate(data);
+
+			if (Validator.hasErrors()) {
+
+				return {
+					messages: Validator.messages,
+					validated: validated[0]
+				};
+			}
+			else {
+
+				this.trigger('valid');
+				console.log('valid');
+				return;
+			}
+
 		},
 
-		validateEmail: function (value) {
-			
+		validateField: function (fieldName, value) {
 
-		},
+			var data = {};
+			data[fieldName] = value;
 
-		validateDate: function (value) {
-			
+			Validator.config[fieldName] = fieldName;
 
-		},
+			Validator.validate(data);
 
-		validateWebAdress: function (value) {
-			
+			return {
+				fail: Validator.hasErrors(),
+				messages: Validator.messages
+			};
 
 		},
 
@@ -49,7 +74,7 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 				firstname: formData.firstname,
 				surname: formData.surname,
 				email: formData.email,
-				date: formData.date,
+				date: new Date(),
 				webpage: formData.webpage
 			});
 

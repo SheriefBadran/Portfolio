@@ -1,4 +1,10 @@
-define(['underscore', 'backbone', 'text!templates/contactForm.html'], function (_, Backbone, ContactFormTemplate) {
+define(['underscore',
+		'backbone',
+		'models/SuccessMessage',
+		'views/SuccessMessageView',
+		'text!templates/contactForm.html'
+], 
+function (_, Backbone, SuccessMessage, SuccessMessageView, ContactFormTemplate) {
 'use strict';
 
 	var doc = document;
@@ -9,12 +15,17 @@ define(['underscore', 'backbone', 'text!templates/contactForm.html'], function (
 
 		id: 'mainContent',
 
+		initialize: function () {
+			
+			this.listenTo(this.model, 'invalid', this.displayFormErrors);
+			this.listenTo(this.model, 'valid', this.displaySuccessMessage);
+		},
+
 		events: {
 			'click #submitForm': 'saveForm',
 			'blur input[name=firstname]': 'handleValidation',
 			'blur input[name=surname]': 'handleValidation',
 			'blur input[name=email]': 'handleValidation',
-			'blur input[name=date]': 'handleValidation',
 			'blur input[name=webaddress]': 'handleValidation'
 		},
 
@@ -34,7 +45,6 @@ define(['underscore', 'backbone', 'text!templates/contactForm.html'], function (
 			formData.firstname = this.$('input[name=firstname]').val();
 			formData.surname = this.$('input[name=surname]').val();
 			formData.email = this.$('input[name=email]').val();
-			formData.date = this.$('input[name=date]').val();
 			formData.webpage = this.$('input[name=webaddress]').val();
 
 			this.model.saveFormData(formData);
@@ -42,45 +52,74 @@ define(['underscore', 'backbone', 'text!templates/contactForm.html'], function (
 
 		handleValidation: function (e) {
 
-			var target = e.target,
+			var validation,
+			errorSpan,
+			target = e.target,
 			fieldName = target.getAttribute('name');
 
-			if (this.validateField(target, fieldName) && target.className === 'invalid') {
+			// Deligate field validation to the model.
+			validation = this.model.validateField(fieldName, target.value);
 
-				target.setAttribute('class', 'valid');
-				console.log('success');
+			if (validation.fail) {
 
+				target.setAttribute('class', 'invalid');
 
+				errorSpan = this.$el.find('.' + fieldName);
+				errorSpan.text(validation.messages[0]);
 			}
 			else {
 
-				console.log('fail');
-				// Add class invalid on input (remove the class I added in the html template).
-				// 
-				target.setAttribute('class', 'invalid');
-			}
+				// Check if error aldready accured and is corrected.
+				if (target.className === 'invalid') {
 
+					target.removeAttribute('class');
+				};
+			}
 		},
 
-		validateField: function (target, fieldName, value) {
+		displayFormErrors: function (model) {
+			
+			var validatedFields = model.validationError.validated,
+			errorMessages = model.validationError.messages,
+			fieldsWithErrors = {},
+			errorSpan;
 
-			switch (fieldName) {
+			var validate;
+			for (validate in validatedFields) {
 
-				case 'firstname':
-					return this.model.validateName(target.value);
+				if (!validatedFields[validate]) {
 
-				case 'surname':
-					return this.model.validateName(target.value);
-
-				case 'email':
-					return this.model.validateEmail(target.value);
-
-				case 'date':
-					return this.model.validateDate(target.value);
-
-				case 'webaddress':
-					return this.model.validateWebAdress(target.value);
+					fieldsWithErrors[validate] = false;
+				};
 			};
+
+
+			var i = 0,
+			fieldName;
+			for (fieldName in fieldsWithErrors) {
+				
+
+				this.$('input[name='+fieldName+']').addClass('invalid');
+				errorSpan = this.$el.find('.' + fieldName);
+				errorSpan.text(errorMessages[i]);
+
+				i++;
+			};
+		},
+
+		displaySuccessMessage: function () {
+
+			Backbone.history.navigate("", {trigger: true});
+
+			var successMessage = new SuccessMessage();
+			successMessage.set({message: 'The form was successfully submitted.'});
+
+			var successMessageView = new SuccessMessageView({model: successMessage});
+			var messageBox = successMessageView.render();
+
+			messageBox.$el.hide();
+			$('#container').append(messageBox.$el);
+			messageBox.$el.fadeIn(500);
 		}
 	});
 

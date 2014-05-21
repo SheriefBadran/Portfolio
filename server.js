@@ -59,7 +59,7 @@ db.once('open', function callback () {
 
 // Schemas
 var Message = new mongoose.Schema({text: String, cid: String, date: Date});
-var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, date: String, webpage: String});
+var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, date: Date, webpage: String});
 
 // Models
 var MessageModel = mongoose.model('Message', Message);
