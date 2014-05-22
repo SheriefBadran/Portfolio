@@ -61,9 +61,11 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 			try {
 
 				// Render the portfolio menu board.
+				// TODO: Rename to HTMLRenderer
 				RenderHTML.renderCollectionView('BoardItemListView', $('#portfolioMenu'));
 
 				// Render the menu.
+				// TODO: Rename to HTMLRenderer
 				RenderHTML.renderCollectionView('MenuItemListView', $('#container'));
 			}
 			catch (e) {
@@ -98,16 +100,21 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 				}
 
 				messages = messageWindow.collection;
-				messages.fetch({reset: true});
-
 				var chat = messageWindow.HTML.$el;
 
-				console.log(chat);
-				chat.hide();
+				RenderHTML.renderChatLoader();
 
-				$('#portfolioAppsContent').append(chat);
+				messages.fetch({
+					reset: true,
+					success: function () {
 
-				chat.fadeIn(1000);
+						chat.hide();
+
+						$('#portfolioAppsContent').html(chat);
+
+						chat.fadeIn(1000);						
+					}
+				});
 			};
 			// messageWindow.messages.fetch({reset: true});
 		},
@@ -126,7 +133,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 				
 				formHTML.$el.hide();
 
-				$('main').append(formHTML.$el);
+				$('#portfolioAppsContent').html(formHTML.$el);
 
 				formHTML.$el.fadeIn(500);
 			};

@@ -59,6 +59,17 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 
 				throw {message: 'RenderHTML.renderCollectionView is called with invalid parameters'};
 			}
+		},
+
+		renderChatLoader: function () {
+
+			require(['views/ChatLoaderView'], function (ChatLoaderView) {
+				
+				var chatLoaderView = new ChatLoaderView({}),
+				chatLoaderHTML = chatLoaderView.render();
+
+				$('#portfolioAppsContent').html(chatLoaderHTML.$el);
+			});
 		}
 	}
 
