@@ -65,7 +65,10 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 				var chatLoaderView = new ChatLoaderView({}),
 				chatLoaderHTML = chatLoaderView.render();
 
-				$('#portfolioAppsContent').html(chatLoaderHTML.$el);
+				if ($.trim($("#portfolioAppsContent").html())=='') {
+
+					$('#portfolioAppsContent').html(chatLoaderHTML.$el);
+				}
 			});
 		}
 	}
