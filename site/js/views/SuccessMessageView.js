@@ -6,7 +6,7 @@ define(['underscore', 'backbone', 'text!templates/successMessage.html'], functio
 		className: 'resp_success',
 
 		events: {
-			'click #closeMsg': 'closeResponseMessage'
+			'click #closeMsgWrapper': 'closeResponseMessage'
 		},
 
 		render: function () {
