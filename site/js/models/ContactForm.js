@@ -43,13 +43,6 @@ define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Valid
 					validated: validated[0]
 				};
 			}
-			else {
-
-				this.trigger('valid');
-				console.log('valid');
-				return;
-			}
-
 		},
 
 		validateField: function (fieldName, value) {
@@ -69,6 +62,8 @@ define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Valid
 		},
 
 		saveFormData: function (formData) {
+
+			var contactForm = this;
 			
 			this.set({
 				firstname: formData.firstname,
@@ -78,7 +73,14 @@ define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Valid
 				webpage: formData.webpage
 			});
 
-			this.save();
+			// Above we set the model with data, hence we pass in null as first parameter instead of JSON key-value pair data. 
+			this.save(null, {
+				success: function () {
+					
+					// On success, event is triggered on the view, to display a success message.
+					contactForm.trigger('valid');
+				}
+			});
 		}	
 	});
 
