@@ -21,7 +21,9 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 	
 	// Private variables.
 	// Document is cashed and retrieved once for each time the module is used.
-	var doc = document;
+	var doc = document,
+	container = $('#container'),
+	chatMessagesFetch;
 	
 	var PortfolioApp = new (Backbone.Router.extend({
 
@@ -44,29 +46,50 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 		index: function () {
 
-			var chat = doc.querySelector('.messageWindow');
-			var contactFormWrapper = $('#contactForm');
+			// Abort get-request if user returns to index (start page) before chat messages are fetched/laoded.
+			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
+
+				chatMessagesFetch.abort();
+			};
+
+			var chatLoader = doc.querySelector('#noTrespassingOuterBarG'),
+			chat = doc.querySelector('.messageWindow'),
+			menuWrapper = doc.querySelector('#menuBoard'),
+			portfolioMenuUl = doc.querySelector('.boardThumb'),
+			contactFormWrapper = $('#contactForm');
+
+			// If chatloader is still running, remove it from dom.
+			if (chatLoader !== null) { chatLoader.remove(); };
 
 			// If user returns to start page, remove the chat from dom...
+			// TODO: Destroy all the message models in the collection.
 			if (chat !== null) { chat.remove(); };
 
 			// Or remove contactForm from dom...
+			// TODO: Destroy the contact form model.
 			if (contactFormWrapper !== null) { 
 
 				contactFormWrapper.fadeOut(200, function () {
+
 					$(this).remove();
 				});
 			};
 
 			try {
 
-				// Render the portfolio menu board.
+				// Render the portfolio menu board if not already rendered.
 				// TODO: Rename to HTMLRenderer
-				RenderHTML.renderCollectionView('BoardItemListView', $('#portfolioMenu'));
+				if (portfolioMenuUl === null) {
 
-				// Render the menu.
+					RenderHTML.renderCollectionView('BoardItemListView', $('#portfolioMenu'));
+				};
+
+				// Render the menu if not already rendered.
 				// TODO: Rename to HTMLRenderer
-				RenderHTML.renderCollectionView('MenuItemListView', $('#container'));
+				if (menuWrapper === null) {
+
+					RenderHTML.renderCollectionView('MenuItemListView', container);
+				};
 			}
 			catch (e) {
 
@@ -81,6 +104,9 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 		},
 
 		loadMessages: function () {
+
+			// Render portfolioBoardMenu and menu if user start application with url: /chat
+			this.index();			
 
 			var wrapper = doc.querySelector('.messageWindow');
 
@@ -104,7 +130,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 				RenderHTML.renderChatLoader();
 
-				messages.fetch({
+				chatMessagesFetch = messages.fetch({
 					reset: true,
 					success: function () {
 
@@ -121,7 +147,16 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 		loadContactForm: function () {
 
+			// Render portfolioBoardMenu and menu if user start application with url: /contact
+			this.index();
+
 			var wrapper = doc.querySelector('#contactForm');
+
+			// Abort get-request if user returns to index (start page) before chat messages are fetched/laoded.
+			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
+
+				chatMessagesFetch.abort();
+			};
 
 			if (wrapper === null) {
 

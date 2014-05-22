@@ -210,13 +210,6 @@ img .appIcon {
 		background-color: transparent;
 		width: 0;
 	}
-	50% {
-		position: relative;
-		height: 5px;
-		z-index: 9999;
-		background-color: #ffa273;
-		width: 50%;
-	}
 	to {
 		position: relative;
 		height: 5px;
@@ -234,13 +227,6 @@ img .appIcon {
 		background-color: transparent;
 		width: 0;
 	}
-	50% {
-		position: relative;
-		height: 5px;
-		z-index: 9999;
-		background-color: #ffa273;
-		width: 50%;
-	}
 	to {
 		position: relative;
 		height: 5px;
@@ -257,13 +243,6 @@ img .appIcon {
 		z-index: 9999;
 		background-color: transparent;
 		width: 0;
-	}
-	50% {
-		position: relative;
-		height: 5px;
-		z-index: 9999;
-		background-color: #ffa273;
-		width: 50%;
 	}
 	to {
 		position: relative;

@@ -5,7 +5,7 @@ define(['underscore', 'backbone', 'views/BoardItemView'], function (_, Backbone,
 
 		tagName: 'ul',
 
-		className: 'thumb',
+		className: 'boardThumb',
 
 		initialize: function () {
 

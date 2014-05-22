@@ -28,7 +28,7 @@
 
 #chatHeader p {
 	color: #fff;
-	font-family: "Helvetica Neue";
+	font: bold 1em "Orbitron-Light", Arial, sans-serif;
 	text-align: center;
 	margin-top: 20px;
 }

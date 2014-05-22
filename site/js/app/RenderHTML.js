@@ -49,10 +49,7 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 						console.log(e.message);
 					}
 
-					setTimeout(function () {
-						
-						parentEl.append(menu.HTML.$el);
-					}, 1900);
+					parentEl.append(menu.HTML.$el);
 				};
 			}
 			else {
