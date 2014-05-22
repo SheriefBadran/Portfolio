@@ -22,8 +22,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 	// Private variables.
 	// Document is cashed and retrieved once for each time the module is used.
 	var doc = document,
-	container = $('#container'),
-	chatMessagesFetch;
+	container = $('#container');
 	
 	var PortfolioApp = new (Backbone.Router.extend({
 
@@ -46,31 +45,18 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 		index: function () {
 
-			// Abort get-request if user returns to index (start page) before chat messages are fetched/laoded.
-			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
-
-				chatMessagesFetch.abort();
-			};
-
-			var chatLoader = doc.querySelector('#noTrespassingOuterBarG'),
-			chat = doc.querySelector('.messageWindow'),
+			var chat = doc.querySelector('.messageWindow'),
 			menuWrapper = doc.querySelector('#menuBoard'),
 			portfolioMenuUl = doc.querySelector('.boardThumb'),
 			contactFormWrapper = $('#contactForm');
 
-			// If chatloader is still running, remove it from dom.
-			if (chatLoader !== null) { chatLoader.remove(); };
-
 			// If user returns to start page, remove the chat from dom...
-			// TODO: Destroy all the message models in the collection.
 			if (chat !== null) { chat.remove(); };
 
 			// Or remove contactForm from dom...
-			// TODO: Destroy the contact form model.
 			if (contactFormWrapper !== null) { 
 
 				contactFormWrapper.fadeOut(200, function () {
-
 					$(this).remove();
 				});
 			};
@@ -105,9 +91,6 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 		loadMessages: function () {
 
-			// Render portfolioBoardMenu and menu if user start application with url: /chat
-			this.index();			
-
 			var wrapper = doc.querySelector('.messageWindow');
 
 			// Render contactForm if it doesn't exit.
@@ -130,7 +113,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 				RenderHTML.renderChatLoader();
 
-				chatMessagesFetch = messages.fetch({
+				messages.fetch({
 					reset: true,
 					success: function () {
 
@@ -147,16 +130,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 
 		loadContactForm: function () {
 
-			// Render portfolioBoardMenu and menu if user start application with url: /contact
-			this.index();
-
 			var wrapper = doc.querySelector('#contactForm');
-
-			// Abort get-request if user returns to index (start page) before chat messages are fetched/laoded.
-			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
-
-				chatMessagesFetch.abort();
-			};
 
 			if (wrapper === null) {
 
