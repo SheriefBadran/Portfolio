@@ -148,7 +148,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 		loadContactForm: function () {
 
 			// Render portfolioBoardMenu and menu if user start application with url: /contact
-			this.index();
+			// this.index();
 
 			var wrapper = doc.querySelector('#contactForm');
 

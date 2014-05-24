@@ -9,14 +9,14 @@ require.config({
 		views: '../views',
 
 		// file paths
-		'socketio': '../../../node_modules/socket.io/lib/socket.io',
+		'socketio': '../../socket.io/socket.io',
 		'underscore': '../libs/underscore',
 		'backbone': '../libs/backbone',
 		'jquery': '../libs/jquery'
 	},
 
 	shim: {
-		'../../../node_modules/socket.io/lib/socket.io': {
+		'socket.io': {
 			exports: 'io'
 		},
 		'underscore': {
