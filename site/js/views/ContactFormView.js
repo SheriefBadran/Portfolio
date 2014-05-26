@@ -37,6 +37,22 @@ function (_, Backbone, SuccessMessage, SuccessMessageView, ContactFormTemplate) 
 			return this;
 		},
 
+		insertIntoDOM: function (animation, renderedHTML, parentEl) {
+
+			if (animation === null) {
+
+				parentEl.html(renderedHTML);
+			}
+			else if (typeof animation === 'string' && animation === 'fadeIn') {
+
+				parentEl.hide();
+
+				parentEl.html(renderedHTML);
+
+				parentEl.fadeIn(500);
+			}
+		},
+
 		saveForm: function (e) {
 
 			e.preventDefault();

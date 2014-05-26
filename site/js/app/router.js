@@ -52,22 +52,30 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 				chatMessagesFetch.abort();
 			};
 
-			var chatLoader = doc.querySelector('#noTrespassingOuterBarG'),
-			chat = doc.querySelector('.messageWindow'),
+			var chatLoader = $('#noTrespassingOuterBarG'),
+			chat = $('.messageWindow'),
 			menuWrapper = doc.querySelector('#menuBoard'),
 			portfolioMenuUl = doc.querySelector('.boardThumb'),
 			contactFormWrapper = $('#contactForm');
 
 			// If chatloader is still running, remove it from dom.
-			if (chatLoader !== null) { chatLoader.remove(); };
+			if (chatLoader.hasOwnProperty('selector') && chatLoader.length > 0) { 
 
-			// If user returns to start page, remove the chat from dom...
-			// TODO: Destroy all the message models in the collection.
-			if (chat !== null) { chat.remove(); };
+				chatLoader.remove(); 
+			};
+			
+
+			if (chat.hasOwnProperty('selector') && chat.length > 0) {
+				
+				chat.fadeOut(200, function() {
+					
+					$(this).remove();
+				});
+			};
 
 			// Or remove contactForm from dom...
 			// TODO: Destroy the contact form model.
-			if (contactFormWrapper !== null) { 
+			if (contactFormWrapper.hasOwnProperty('selector') && contactFormWrapper.length > 0) { 
 
 				contactFormWrapper.fadeOut(200, function () {
 
@@ -106,12 +114,13 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 		loadMessages: function () {
 
 			// Render portfolioBoardMenu and menu if user start application with url: /chat
-			this.index();
+			// this.index();
 
-			var wrapper = doc.querySelector('.messageWindow');
+			var wrapper = $('.messageWindow'),
+			collectionView;
 
 			// Render contactForm if it doesn't exit.
-			if (wrapper === null) {
+			if (wrapper.hasOwnProperty('selector') && wrapper.length === 0) {
 
 				var messageModels = new Messages();
 				var messages;
@@ -126,7 +135,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 				}
 
 				messages = messageWindow.collection;
-				var chat = messageWindow.HTML.$el;
+				var chatView = messageWindow.View;
 
 				RenderHTML.renderChatLoader();
 
@@ -134,11 +143,9 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 					reset: true,
 					success: function () {
 
-						chat.hide();
-
-						$('#portfolioAppsContent').html(chat);
-
-						chat.fadeIn(1000);					
+						// TODO: Surround code within success functin with a try-catch block.
+						// If no animation, pass null instead of 'fadeIn' in first parameter.
+						chatView.insertIntoDOM('fadeIn', chatView.$el, $('#portfolioAppsContent'));
 					}
 				});
 			};
@@ -150,7 +157,7 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 			// Render portfolioBoardMenu and menu if user start application with url: /contact
 			// this.index();
 
-			var wrapper = doc.querySelector('#contactForm');
+			var wrapper = $('#contactForm');
 
 			// Abort get-request if user returns to index (start page) before chat messages are fetched/laoded.
 			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
@@ -158,25 +165,15 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 				chatMessagesFetch.abort();
 			};
 
-			if (wrapper === null) {
+			if (wrapper.hasOwnProperty('selector') && wrapper.length === 0) {
 
 				var contactForm = new ContactForm({});
 				var contactFormView = new ContactFormView({model: contactForm});
 
 				var formHTML = contactFormView.render();
-				console.log(formHTML.$el);
-				
-				formHTML.$el.hide();
 
-				$('#portfolioAppsContent').html(formHTML.$el);
-
-				formHTML.$el.fadeIn(500);
+				contactFormView.insertIntoDOM('fadeIn', formHTML.$el, $('#portfolioAppsContent'));
 			};
-		},
-
-		rssFeed: function () {
-
-			console.log('RssFeed');
 		}
 	}));
 

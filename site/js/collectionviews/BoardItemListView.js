@@ -22,6 +22,11 @@ define(['underscore', 'backbone', 'views/BoardItemView'], function (_, Backbone,
 			
 			this.collection.forEach(this.addItem, this);
 			return this;
+		},
+
+		insertIntoDOM: function (renderedHTML, parentEl) {
+			
+			parentEl.html(renderedHTML);
 		}
 	});
 

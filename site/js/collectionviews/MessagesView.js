@@ -82,6 +82,27 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 			return this;
 		},
 
+		insertIntoDOM: function (animation, renderedHTML, parentEl) {
+
+			// If no animation, null is passed into first parameter animation.
+			if (animation === null) {
+
+				parentEl.html(renderedHTML);
+			}
+			else if (typeof animation === 'string' && animation === 'fadeIn') {
+
+				renderedHTML.hide();
+
+				parentEl.html(renderedHTML);
+
+				renderedHTML.fadeIn(1000);
+			}
+			else {
+
+				throw ({message: 'Error! Invalid parameter in function insertIntoDOM.'});
+			}
+		},
+
 		initialRender: function () {
 
 			this.$el.html(this.template());

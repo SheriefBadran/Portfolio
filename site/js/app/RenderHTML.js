@@ -8,7 +8,8 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 	
 	return {
 		renderCollectionView: function (collectionViewName, parentEl) {
-			console.log(parentEl);
+			
+			var collectionView;
 			
 			if (typeof collectionViewName === 'string' && parentEl.length && parentEl instanceof jQuery) {
 
@@ -21,6 +22,7 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 
 						// Retrieve rendered html for the apps menu board.
 						var portfolioMenu = InitCollectionView(boardCollectionSet.boardItems, boardCollectionSet.boardItemList, BoardItemListView);
+						collectionView = portfolioMenu.View;
 					}
 					catch (e) {
 
@@ -31,7 +33,9 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 					setTimeout(function () {
 
 						// Inject the rendered HTML into the DOM.
-						parentEl.html(portfolioMenu.HTML.el);
+						// BoardItemListView.insertIntoDOM(portfolioMenu.View.el);
+						collectionView.insertIntoDOM(portfolioMenu.View.el, parentEl);
+						// parentEl.html(portfolioMenu.View.el);
 					}, 1600);
 				};
 
@@ -43,13 +47,15 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 					try {
 
 						var menu = InitCollectionView(menuCollectionSet.menuItems, menuCollectionSet.menuItemList, MenuItemListView);
+						collectionView = menu.View;
 					}
 					catch (e) {
 
 						console.log(e.message);
 					}
 
-					parentEl.append(menu.HTML.$el);
+					// parentEl.append(menu.View.$el);
+					collectionView.insertIntoDOM(menu.View.$el, parentEl);
 				};
 			}
 			else {

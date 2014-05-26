@@ -21,7 +21,7 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 		}
 
 		return {
-			HTML: collectionView,
+			View: collectionView,
 			collection: collection
 		};
 	};

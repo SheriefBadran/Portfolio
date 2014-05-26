@@ -31,6 +31,11 @@ function (_, Backbone, MenuItemView, MenuTemplate) {
 			return this;
 		},
 
+		insertIntoDOM: function (renderedHTML, parentEl) {
+			
+			parentEl.append(renderedHTML);
+		},
+
 		toggleMenu: function (menuBoard) {
 
 			if (typeof menuBoard === 'object' && menuBoard.length && menuBoard instanceof jQuery) {
