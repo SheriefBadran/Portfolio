@@ -1,9 +1,9 @@
 @import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css');
  
 .resp_info, .resp_success, .resp_warning, .resp_error {
-/*margin: 10px 0px;*/
-/*margin: 0 auto;*/
-padding: 3px 6px 3px 6px;
+    /*margin: 10px 0px;*/
+    /*margin: 0 auto;*/
+    padding: 6px 6px 6px 6px;
 }
 
 .resp_info {
@@ -18,9 +18,9 @@ padding: 3px 6px 3px 6px;
     width: 100%;
     min-width: 320px;
     color: #4F8A10;
-    /*background-color: #DFF2BF;*/
-    background-color: #332E2D;
-    opacity: 0.7;
+    background-color: #DFF2BF;
+    /*background-color: #332E2D;*/
+    opacity: 0.9;
     z-index: 10000;
 }
 
@@ -41,8 +41,10 @@ padding: 3px 6px 3px 6px;
 }
 
 #closeMsg {
+    position: absolute;
+    padding: 6px;
+    top: 5px;
+    right: 3%;
     color: red !important;
-    float: right;
-    font-size: 1em;
-    padding: 5px;
+    text-decoration: underline !important;
 }

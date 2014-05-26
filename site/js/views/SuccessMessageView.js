@@ -6,7 +6,7 @@ define(['underscore', 'backbone', 'text!templates/successMessage.html'], functio
 		className: 'resp_success',
 
 		events: {
-			'click #closeMsgWrapper': 'closeResponseMessage'
+			'click #closeMsg': 'closeResponseMessage'
 		},
 
 		render: function () {
@@ -20,7 +20,8 @@ define(['underscore', 'backbone', 'text!templates/successMessage.html'], functio
 		closeResponseMessage: function (e) {
 			
 			// TODO: Only temporary solution, destroy the model and delete from the dome when destroy trigger event.
-			this.el.remove();
+			e.preventDefault();
+			this.$el.remove();
 		}
 	});
 
