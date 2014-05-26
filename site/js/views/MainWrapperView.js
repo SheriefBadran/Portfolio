@@ -1,4 +1,8 @@
-define(['underscore', 'backbone', 'text!templates/mainwrapper.html'], function (_, Backbone, MainWrapperTemplate) {
+define(['underscore', 
+		'backbone', 
+		'text!templates/mainwrapper.html'
+], 
+function (_, Backbone, MainWrapperTemplate) {
 'use strict';
 
 	var MainWrapperView = Backbone.View.extend({
