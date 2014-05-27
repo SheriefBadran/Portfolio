@@ -65,6 +65,11 @@ var ContactMessage = new mongoose.Schema({firstname: String, surname: String, em
 var MessageModel = mongoose.model('Message', Message);
 var ContactMessageModel = mongoose.model('ContactMessage', ContactMessage);
 
+var sanitize = function (string) {
+
+    return string.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 // Socket.io
 io.sockets.on('connection', function(client){
     console.log('new client');
@@ -75,11 +80,13 @@ io.sockets.on('connection', function(client){
     client.on('message:create', function (data) {
         // received message from client
         console.log(data);
+
         var message = new MessageModel({
-            text: data.text,
-            cid: data.cid,
-            date: data.date
+            text: sanitize(data.text),
+            cid: sanitize(data.cid),
+            date: sanitize(data.date)
         });
+
         message.save( function( err ) {
             if( !err ) {
                 return console.log( 'created' );

@@ -125,7 +125,9 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 			// If no message -> return
 			if (!this.$(".messageView").val()) { return; }
 
-			var message = new Message({text: this.$(".messageView").val()});
+			var messageText = _.escape(this.$(".messageView").val());
+
+			var message = new Message({text: messageText});
 
 			// Mark broadcasted message as created on this client.
 			message.thisClient = true;
@@ -139,7 +141,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 			try {
 
 				// Save message to server.
-				message.saveMessage();			
+				message.saveMessage();	
 
 				// Create a MessageView for the model and render it into the DOM.
 				this.addMessage(message);
