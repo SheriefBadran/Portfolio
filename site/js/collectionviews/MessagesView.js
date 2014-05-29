@@ -72,7 +72,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 			}
 			else {
 
-				throw ({message: 'Error! Your message could not be posted to the chat.'});
+				throw ({message: 'Error! Your message could not be posted to the chat. Reload the chat and try again.'});
 			}
 		},
 
