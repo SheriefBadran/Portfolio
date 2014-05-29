@@ -22,7 +22,7 @@ define(['collections/BoardItemList', 'collections/MenuItemList'], function (Boar
 			
 			var menuItems = [
 				{itemTitle: 'My Work'},
-				{itemTitle: 'Say Hello'},
+				{itemTitle: 'Contact Me'},
 				{itemTitle: 'About This App'}
 			];
 

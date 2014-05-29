@@ -27,7 +27,7 @@ define(['underscore', 'backbone', 'text!templates/menuItem.html'], function (_, 
 			e.preventDefault();
 			var menuChoice = this.model.get('itemTitle');
 
-			if (typeof menuChoice === 'string' && menuChoice === 'Say Hello') {
+			if (typeof menuChoice === 'string' && menuChoice === 'Contact Me') {
 
 				Backbone.history.navigate("/contact", {trigger: true});
 			}
