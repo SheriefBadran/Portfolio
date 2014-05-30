@@ -6,7 +6,7 @@ define(['underscore',
 function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 'use strict';
 
-	var server = window.socket;
+	var server = Backbone.socket;
 	var messagesView = Backbone.View.extend({
 
 		className: 'messageWindow',
@@ -28,12 +28,20 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 			// Callback will have data emitted from the server.			
 			server.on('create', function (messageObj) {
 
-				var message = new Message({text: messageObj.text, cid: messageObj.cid});
+				var message = new Message({sender: messageObj.sender, text: messageObj.text, cid: messageObj.cid});
 
 				// Mark broadcasted message as not created on this client.
 				message.thisClient = false;
 
 				that.collection.add(message);
+				that.addMessage(message);
+			});
+
+			server.on('joined', function (nickname) {
+				
+				var userJoinedMessage = nickname + ' joined the chat...';
+				var message = new Message({text: userJoinedMessage});
+				message.joinedChatMessage = true;
 				that.addMessage(message);
 			});
 
@@ -68,6 +76,11 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 				if (!message.thisClient) {
 
 					this.$(".messagesArea").append(messageView.renderBroadCast().el);					
+				};
+
+				if (message.joinedChatMessage) {
+					
+					this.$(".messagesArea").append(messageView.renderJoinedChatMessage().el);
 				};
 			}
 			else {
@@ -122,12 +135,22 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 
 		submitMessage: function (e) {
 
+			var sender;
 			// If no message -> return
 			if (!this.$(".messageView").val()) { return; }
 
 			var messageText = _.escape(this.$(".messageView").val());
 
-			var message = new Message({text: messageText});
+			if (window.localStorage && 'sender' in localStorage) {
+
+				sender = _.escape(localStorage.getItem('sender'));
+			}
+			else {
+
+				sender = 'Anonymous';
+			}
+
+			var message = new Message({sender: sender, text: messageText});
 
 			// Mark broadcasted message as created on this client.
 			message.thisClient = true;

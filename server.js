@@ -58,7 +58,7 @@ db.once('open', function callback () {
 });
 
 // Schemas
-var Message = new mongoose.Schema({text: String, cid: String, date: Date});
+var Message = new mongoose.Schema({sender: String, text: String, cid: String, date: Date});
 var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, date: Date, webpage: String});
 
 // Models
@@ -73,6 +73,14 @@ var sanitize = function (string) {
 // Socket.io
 io.sockets.on('connection', function(client){
     console.log('new client');
+
+    client.on('message:join', function (name) {
+
+        console.log(name);
+        
+        // broadcast joining person to the chat.
+        client.broadcast.emit('joined', name);
+    });
     
     // Emit the 'messages' event on the client.
     
@@ -82,6 +90,7 @@ io.sockets.on('connection', function(client){
         console.log(data);
 
         var message = new MessageModel({
+            sender: sanitize(data.sender),
             text: sanitize(data.text),
             cid: sanitize(data.cid),
             date: sanitize(data.date)

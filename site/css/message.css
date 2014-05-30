@@ -118,6 +118,15 @@ section.message {
 	color: #fff;
 }
 
+.sender {
+	margin-top: 9px;
+	padding: 0 0 0 10px;
+	font-family: "Helvetica Neue", Arial;
+	font-style: italic;
+	font-size: 1.0em;
+	color: #fff;
+}
+
 /* p tag it self is a container within the top bar. */
 p .topbarContainer {
 	position: relative;
@@ -125,16 +134,21 @@ p .topbarContainer {
 
 p .deleteIcon {
   position: absolute;
-  top: 9px;
+  top: 5px;
   right: 22px;
 }
 
 p .editIcon {
   position: absolute;
-  top: 9px;
+  top: 5px;
   right: 42px;
 }
 
+/*For date*/
+.bottomBar p {
+	color: #fff;
+	padding: 0 0 5px 10px;
+}
 /*#messageInput {
 	position: absolute;
 	bottom : 0;

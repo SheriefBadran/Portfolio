@@ -23,7 +23,8 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 	// Document is cashed and retrieved once for each time the module is used.
 	var doc = document,
 	container = $('#container'),
-	chatMessagesFetch;
+	chatMessagesFetch,
+	server = Backbone.socket;
 	
 	var PortfolioApp = new (Backbone.Router.extend({
 
@@ -116,10 +117,30 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 			// Render portfolioBoardMenu and menu if user start application with url: /chat
 			// this.index();
 
+			if (window.localStorage && !('sender' in localStorage)) {
+				var nameRequested = true;
+				while (nameRequested) {
+
+					var sender = prompt('Enter your nick name:');
+
+					if (sender !== null && sender.length > 1) {
+
+						localStorage.setItem('sender', sender);
+						nameRequested = false;
+					}
+					else {
+						nameRequested = true;
+					}
+				};
+			};
+
+			var nickname = localStorage.getItem('sender');
+			server.emit('message:join', nickname);
+
 			var wrapper = $('.messageWindow'),
 			collectionView;
 
-			// Render contactForm if it doesn't exit.
+			// Render chat if it doesn't exit.
 			if (wrapper.hasOwnProperty('selector') && wrapper.length === 0) {
 
 				var messageModels = new Messages();

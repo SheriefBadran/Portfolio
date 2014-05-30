@@ -2,8 +2,9 @@ define(['underscore',
 		'backbone',
 		'models/Message',
 		'text!templates/message.html', 
-		'text!templates/messageBroadCast.html'], 
-function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate) {
+		'text!templates/messageBroadCast.html',
+		'text!templates/chatJoinMessage.html'], 
+function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinMessageTemplate) {
 'use strict';
 	
 	var MessageView = Backbone.View.extend({
@@ -34,6 +35,12 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate) {
 		renderBroadCast: function () {
 
 			this.$el.html(this.broadCastTemplate(this.model.toJSON()));
+			return this;
+		},
+
+		renderJoinedChatMessage: function () {
+			
+			this.$el.html(this.joinTemplate(this.model.toJSON()));
 			return this;
 		},
 
@@ -74,7 +81,9 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate) {
 
 		template: _.template(messageTemplate),
 
-		broadCastTemplate: _.template(messageBroadCastTemplate)
+		broadCastTemplate: _.template(messageBroadCastTemplate),
+
+		joinTemplate: _.template(joinMessageTemplate)
 
 	});
 

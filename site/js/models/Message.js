@@ -6,14 +6,15 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 		io = require('socketio');
 	}
 
-	window.socket = io.connect('http://localhost:8000');
-	var server = window.socket;
+	Backbone.socket = io.connect('http://localhost:8000');
+	var server = Backbone.socket;
 
 	var Message = Backbone.Model.extend({
 
 		defaults: function () {
 
 			return {
+				sender: 'Anonymous',
 				text: '',
 				cid: '',
 				date: new Date()
@@ -27,6 +28,8 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 		// Flag if message is created on this client or not.
 		thisClient: false,
+
+		userJoinedMessage: false,
 
 		deleteMessage: function () {
 
