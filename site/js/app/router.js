@@ -118,23 +118,25 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 			// this.index();
 
 			if (window.localStorage && !('sender' in localStorage)) {
+
 				var nameRequested = true;
 				while (nameRequested) {
 
 					var sender = prompt('Enter your nick name:');
 
-					if (sender !== null && sender.length > 1) {
+					if (sender !== null && sender.length > 1 && $.trim(sender) === '') {
 
 						localStorage.setItem('sender', sender);
 						nameRequested = false;
 					}
 					else {
+
 						nameRequested = true;
 					}
 				};
 			};
 
-			var nickname = localStorage.getItem('sender');
+			var nickname = _.escape(localStorage.getItem('sender'));
 			server.emit('message:join', nickname);
 
 			var wrapper = $('.messageWindow'),

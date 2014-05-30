@@ -75,11 +75,9 @@ io.sockets.on('connection', function(client){
     console.log('new client');
 
     client.on('message:join', function (name) {
-
-        console.log(name);
         
         // broadcast joining person to the chat.
-        client.broadcast.emit('joined', name);
+        client.broadcast.emit('joined', sanitize(name));
     });
     
     // Emit the 'messages' event on the client.
