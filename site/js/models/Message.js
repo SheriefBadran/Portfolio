@@ -16,7 +16,7 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 			return {
 				sender: 'Anonymous',
 				text: '',
-				cid: '',
+				serverId: '',
 				date: new Date()
 			}
 		},
@@ -33,18 +33,12 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 		deleteMessage: function () {
 
+			var message = this.collection.get(this.id);
+
+			server.emit('message:delete', this.get('serverId'));
+
 			//-- bubble to every collection the model belongs --//
-			var message = this.collection.get(this.cid);
-
-			// Unable delete functionality for messages loaded from database.
-			if (message.hasOwnProperty('id')) {
-				return;
-			};
-
 			message.trigger('destroy', this);
-
-			server.emit('message:delete', this.cid);
-			// this.destroy();
 		},
 
 		updateMessage: function (value) {
@@ -55,8 +49,14 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 		saveMessage: function () {
 
-			this.set({cid: this.cid});
+			var that = this;
 			server.emit('message:create', this.toJSON());
+
+			server.on('clientcreate', function (messageObj) {
+				
+				that.set({serverId: messageObj.cid});
+				that.set({_id: messageObj._id});
+			});
 			
 			// TODO: Implement Error Handling.
 			// this.save();

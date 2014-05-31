@@ -5,10 +5,8 @@
 
 define(['underscore', 
 		'backbone',
-		'app/Factory',
 		'app/InitCollectionView',
 		'collectionviews/BoardItemListView',
-		'collectionviews/MenuItemListView',
 		'collections/Messages',
 		'collectionviews/MessagesView',
 		'models/ContactForm',
@@ -16,7 +14,7 @@ define(['underscore',
 		'app/RenderCoreHTML',
 		'app/RenderHTML'
 ],
-function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemListView, Messages, MessagesView, ContactForm, ContactFormView, RenderCoreHTML, RenderHTML) {
+function (_, Backbone, InitCollectionView, BoardItemListView, Messages, MessagesView, ContactForm, ContactFormView, RenderCoreHTML, RenderHTML) {
 'use strict';
 	
 	// Private variables.
@@ -117,27 +115,13 @@ function (_, Backbone, Factory, InitCollectionView, BoardItemListView, MenuItemL
 			// Render portfolioBoardMenu and menu if user start application with url: /chat
 			// this.index();
 
-			if (window.localStorage && !('sender' in localStorage)) {
-
-				var nameRequested = true;
-				while (nameRequested) {
-
-					var sender = prompt('Enter your nick name:');
-
-					if (sender !== null && sender.length > 1 && $.trim(sender) === '') {
-
-						localStorage.setItem('sender', sender);
-						nameRequested = false;
-					}
-					else {
-
-						nameRequested = true;
-					}
-				};
-			};
-
-			var nickname = _.escape(localStorage.getItem('sender'));
-			server.emit('message:join', nickname);
+			require(['app/AskForNickname'], function (AskForNickname) {
+				
+				console.log(AskForNickname);
+				console.log(server);
+				var nickname = AskForNickname();
+				server.emit('message:join', nickname);
+			});
 
 			var wrapper = $('.messageWindow'),
 			collectionView;

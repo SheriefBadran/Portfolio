@@ -58,7 +58,7 @@ db.once('open', function callback () {
 });
 
 // Schemas
-var Message = new mongoose.Schema({sender: String, text: String, cid: String, date: Date});
+var Message = new mongoose.Schema({sender: String, text: String, cid: String, _id: Object, date: Date});
 var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, date: Date, webpage: String});
 
 // Models
@@ -86,11 +86,13 @@ io.sockets.on('connection', function(client){
     client.on('message:create', function (data) {
         // received message from client
         console.log(data);
-
+        var serverid = mongoose.Types.ObjectId();
+        console.log(serverid);
         var message = new MessageModel({
             sender: sanitize(data.sender),
             text: sanitize(data.text),
-            cid: sanitize(data.cid),
+            cid: serverid,
+            _id: serverid,
             date: sanitize(data.date)
         });
 
@@ -101,8 +103,12 @@ io.sockets.on('connection', function(client){
                 return console.log( err );
             }
         });
+
+        data.cid = serverid;
+        data._id = serverid;
         
         // broadcast back to client.
+        client.emit('clientcreate', data);
         client.broadcast.emit('create', data);
     });
 

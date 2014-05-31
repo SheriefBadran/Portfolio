@@ -28,7 +28,13 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 			// Callback will have data emitted from the server.			
 			server.on('create', function (messageObj) {
 
-				var message = new Message({sender: messageObj.sender, text: messageObj.text, cid: messageObj.cid});
+				var message = new Message({
+					sender: messageObj.sender, 
+					text: messageObj.text, 
+					cid: messageObj.cid, 
+					_id: messageObj._id
+				});
+				console.log(message);
 
 				// Mark broadcasted message as not created on this client.
 				message.thisClient = false;
@@ -90,7 +96,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 		},
 
 		renderMessages: function () {
-
+			console.log(this.collection);
 			this.collection.forEach(this.addMessage, this);
 			return this;
 		},
