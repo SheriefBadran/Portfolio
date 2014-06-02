@@ -28,18 +28,21 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 
 		render: function () {
 
+			this.scrollDown();
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		},
 
 		renderBroadCast: function () {
 
+			this.scrollDown();
 			this.$el.html(this.broadCastTemplate(this.model.toJSON()));
 			return this;
 		},
 
 		renderJoinedChatMessage: function () {
 			
+			this.scrollDown();
 			this.$el.html(this.joinTemplate(this.model.toJSON()));
 			return this;
 		},
@@ -78,6 +81,11 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 				this.$('.text').removeClass('edit');
 			}
 			console.log(value);
+		},
+
+		scrollDown : function () {
+			
+			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 200);
 		},
 
 		template: _.template(messageTemplate),
