@@ -167,11 +167,17 @@ p .editIcon a {
 }*/
 
 .messageView {
+	display: block;
 	width: 75%;
 	border-radius: 20px;
 	outline: none;
 	resize: none;
 	overflow: auto;
+	margin: 0 auto 10px auto;
+	padding: 10px 10px 0 10px;
+	color: #000;
+	font-family: "Helvetica Neue", Arial;
+	font-size: 1.0em;
 }
 
 .edit {
