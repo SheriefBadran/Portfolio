@@ -43,6 +43,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 
 				that.collection.add(message);
 				that.addMessage(message);
+				$("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
 			});
 
 			// CREATE MESSAGE WRITTEN BY CLIENT.

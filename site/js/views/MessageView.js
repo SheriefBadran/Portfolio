@@ -26,7 +26,7 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 			'blur .editing': 'closeEditMode'
 		},
 
-		render: function () {
+		render: function (e) {
 
 			this.scrollDown();
 			this.$el.html(this.template(this.model.toJSON()));
@@ -35,7 +35,6 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 
 		renderBroadCast: function () {
 
-			this.scrollDown();
 			this.$el.html(this.broadCastTemplate(this.model.toJSON()));
 			return this;
 		},
@@ -85,7 +84,7 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 
 		scrollDown : function () {
 			
-			$("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 200);
+			$("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
 		},
 
 		template: _.template(messageTemplate),
