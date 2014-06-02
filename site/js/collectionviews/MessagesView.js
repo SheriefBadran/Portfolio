@@ -24,7 +24,9 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 			var that = this;
 
 			// SOCKET.IO API
-			// Listening for server create broadcast.
+			// Listening to server.
+
+			// BROADCAST SENT MESSAGE TO ALL CONNECTED CLIENTS.
 			// Callback will have data emitted from the server.			
 			server.on('create', function (messageObj) {
 
@@ -43,6 +45,23 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 				that.addMessage(message);
 			});
 
+			// CREATE MESSAGE WRITTEN BY CLIENT.
+			server.on('clientcreate', function (messageObj) {
+
+				var message = new Message({sender: messageObj.sender, text: messageObj.text, serverId: messageObj.serverId, date: messageObj.date});
+
+				message.thisClient = true;
+
+				that.collection.add(message);
+
+				// Reset textarea.
+				that.$(".messageView").val('');
+				that.$(".messageView").focus();
+				that.addMessage(message);
+				console.log(message);
+			});
+
+			// CREATE MESSAGE TO NOTIFY WHO JOINED CHAT.
 			server.on('joined', function (nickname) {
 				
 				var userJoinedMessage = nickname + ' joined the chat...';
@@ -51,11 +70,11 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 				that.addMessage(message);
 			});
 
-			// Listening for server delete broadcast.
+			// BROADCAST DELETE INSTRUCTION TO ALL CLIENTS
 			server.on('delete', function (id) {
 
 				var message = that.collection.get(id);
-				message.trigger('destroy', message);				
+				message.trigger('destroy', message);	
 			});
 		},
 
@@ -69,7 +88,6 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 		addMessage: function (message) {
 
 			// Messages created on this client are designed different than broadcasted messages. See MessageView.
-
 			if ('thisClient' in message && typeof message.thisClient === 'boolean') {
 
 				var messageView = new MessageView({model: message});				
@@ -156,30 +174,8 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 				sender = 'Anonymous';
 			}
 
-			var message = new Message({sender: sender, text: messageText});
-
-			// Mark broadcasted message as created on this client.
-			message.thisClient = true;
-
-			this.collection.add(message);
-
-			// Reset textarea.
-			this.$(".messageView").val('');
-			this.$(".messageView").focus();
-
-			try {
-
-				// Save message to server.
-				message.saveMessage();	
-
-				// Create a MessageView for the model and render it into the DOM.
-				this.addMessage(message);
-			}
-			catch (err) {
-
-				// TODO: Implement error response to the user.
-				console.log(err.message);
-			}
+			// Send a message object literal to server.
+			server.emit('message:create', {'sender': sender, 'text': messageText, 'date': new Date()});
 		}
 	});
 

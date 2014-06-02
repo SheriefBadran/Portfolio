@@ -45,7 +45,7 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 		},
 
 		deleteMessageModel: function (e) {
-			
+
 			e.preventDefault();
 			// Call function on model to delete/destroy instance (model is also removed from collection).
 			// This view listens on destroy event from model. On destroy, this view will remove message from the dom.

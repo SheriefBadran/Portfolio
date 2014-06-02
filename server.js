@@ -58,7 +58,7 @@ db.once('open', function callback () {
 });
 
 // Schemas
-var Message = new mongoose.Schema({sender: String, text: String, cid: String, _id: Object, date: Date});
+var Message = new mongoose.Schema({sender: String, text: String, serverId: String, _id: Object, date: Date});
 var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, date: Date, webpage: String});
 
 // Models
@@ -85,13 +85,13 @@ io.sockets.on('connection', function(client){
     // Listen for messages events form client.
     client.on('message:create', function (data) {
         // received message from client
-        console.log(data);
+
         var serverid = mongoose.Types.ObjectId();
         console.log(serverid);
         var message = new MessageModel({
             sender: sanitize(data.sender),
             text: sanitize(data.text),
-            cid: serverid,
+            serverId: serverid,
             _id: serverid,
             date: sanitize(data.date)
         });
@@ -104,9 +104,11 @@ io.sockets.on('connection', function(client){
             }
         });
 
-        data.cid = serverid;
+        data.serverId = serverid;
         data._id = serverid;
         
+        console.log('data with new id');
+        console.log(data);
         // broadcast back to client.
         client.emit('clientcreate', data);
         client.broadcast.emit('create', data);
@@ -117,7 +119,7 @@ io.sockets.on('connection', function(client){
         console.log('inside delete callback func');
         console.log(data);
 
-        return MessageModel.findOne( {cid: data}, function( err, message ) {
+        return MessageModel.findOne( {serverId: data}, function( err, message ) {
             return message.remove( function( err ) {
                 if( !err ) {
                     console.log( 'Message removed' );

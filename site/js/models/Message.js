@@ -26,6 +26,8 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 		// Given for mongo db
 		idAttribute: '_id',
 
+		test: [],
+
 		// Flag if message is created on this client or not.
 		thisClient: false,
 
@@ -33,12 +35,10 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 		deleteMessage: function () {
 
-			var message = this.collection.get(this.id);
-
+			//-- bubble to every collection the model belongs --//
 			server.emit('message:delete', this.get('serverId'));
 
-			//-- bubble to every collection the model belongs --//
-			message.trigger('destroy', this);
+			this.trigger('destroy', this);
 		},
 
 		updateMessage: function (value) {
@@ -49,15 +49,19 @@ define(['underscore', 'backbone', 'socketio'], function (_, Backbone, io) {
 
 		saveMessage: function () {
 
+
+
 			var that = this;
 			server.emit('message:create', this.toJSON());
-
+			console.log(this.toJSON());
 			server.on('clientcreate', function (messageObj) {
-				
-				that.set({serverId: messageObj.cid});
+
+				console.log(that);
+				// var number = Math.random() * (100 - 1) + 1;
+				that.set({serverId: messageObj.serverId});
 				that.set({_id: messageObj._id});
 			});
-			
+
 			// TODO: Implement Error Handling.
 			// this.save();
 		}
