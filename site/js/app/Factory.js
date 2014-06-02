@@ -21,6 +21,7 @@ define(['collections/BoardItemList', 'collections/MenuItemList'], function (Boar
 		getMenuCollectionSet: function () {
 			
 			var menuItems = [
+				{itemTitle: 'Home'},
 				{itemTitle: 'My Work'},
 				{itemTitle: 'Contact Me'},
 				{itemTitle: 'About This App'}

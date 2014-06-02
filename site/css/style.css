@@ -124,6 +124,7 @@ header {
 }
 
 main {
+	min-height: 900px;
 	width: 100%;
 }
 
@@ -141,23 +142,25 @@ img .appIcon {
 	top: 79px;
 	left: 0;
 	z-index: 9999;
-	width: 0%;
+	height: 0px;
+	width: 100%;
 	background-color: #202024;
 	opacity: 0.97;
 	border-bottom: 5px solid #2A2A31;
 	overflow: hidden;
+	transition: height 0.5s linear 0s;
 }
 
-#menuBoard.keepDown {
+/*#menuBoard.keepDown {
 	width: 100%;
 }
 
 .toggleDown {
-	-webkit-animation-duration: 1.0s;
-	-moz-animation-duration: 1.0s;
-	-ms-animation-duration: 1.0s;
-	-o-animation-duration: 1.0s;
-	animation-duration: 1.0s;
+	-webkit-animation-duration: 0.5s;
+	-moz-animation-duration: 0.5s;
+	-ms-animation-duration: 0.5s;
+	-o-animation-duration: 0.5s;
+	animation-duration: 0.5s;
 	-webkit-animation-name: show;
 	-moz-animation-name: show;
 	-ms-animation-name: show;
@@ -166,17 +169,17 @@ img .appIcon {
 }
 
 .toggleUp {
-	-webkit-animation-duration: 1.0s;
-	-moz-animation-duration: 1.0s;
-	-ms-animation-duration: 1.0s;
-	-o-animation-duration: 1.0s;
-	animation-duration: 1.0s;
+	-webkit-animation-duration: 0.5s;
+	-moz-animation-duration: 0.5s;
+	-ms-animation-duration: 0.5s;
+	-o-animation-duration: 0.5s;
+	animation-duration: 0.5s;
 	-webkit-animation-name: hide;
 	-moz-animation-name: hide;
 	-ms-animation-name: hide;
 	-o-animation-name: hide;
 	animation-name: hide;
-}
+}*/
 
 #menuBoard p {
 	color: #fff;
@@ -252,88 +255,4 @@ img .appIcon {
 		background-color: #ffa273;
 		width: 100%;
 	}
-}
-
-@-webkit-keyframes show {
-	from {
-		height: 0px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-		overflow: hidden;
-	}
-	to {
-		height: 160px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-	}
-}
-
-@-moz-keyframes show {
-	from {
-		height: 0px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-		overflow: hidden;
-	}
-	to {
-		height: 160px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-	}
-}
-
-@-ms-keyframes show {
-	from {
-		height: 0px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-		overflow: hidden;
-	}
-	to {
-		height: 160px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-	}	
-}
-
-@-webkit-keyframes hide {
-	from {
-		height: 160px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-		overflow: hidden;
-	}
-	to {
-		height: 0px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-	}
-}
-
-@-moz-keyframes hide {
-	from {
-		height: 160px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-		overflow: hidden;
-	}
-	to {
-		height: 0px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-	}
-}
-
-@-ms-keyframes hide {
-	from {
-		height: 0px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-		overflow: hidden;
-	}
-	to {
-		height: 160px;
-		width: 100%;
-		border-bottom: 5px solid #2A2A31;
-	}	
 }

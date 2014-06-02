@@ -4,6 +4,8 @@ define(['underscore',
 		'text!templates/menu.html'], 
 function (_, Backbone, MenuItemView, MenuTemplate) {
 'use strict';
+	
+	var menuMaxHeight = 208;
 
 	var MenuItemListView = Backbone.View.extend({
 
@@ -38,21 +40,14 @@ function (_, Backbone, MenuItemView, MenuTemplate) {
 
 		toggleMenu: function (menuBoard) {
 
-			if (typeof menuBoard === 'object' && menuBoard.length && menuBoard instanceof jQuery) {
+			if (menuBoard.height() === menuMaxHeight) {
 
-				if (menuBoard.hasClass('toggleDown')) {
+				menuBoard.height(0);
+			}
+			else {
 
-					menuBoard.removeClass('toggleDown')
-					menuBoard.addClass('toggleUp');
-					menuBoard.removeClass('keepDown');
-				}
-				else {
-
-					menuBoard.removeClass('toggleUp');
-					menuBoard.addClass('toggleDown');
-					menuBoard.addClass('keepDown');
-				}
-			};
+				menuBoard.height(menuMaxHeight);
+			}
 		}
 	});
 
