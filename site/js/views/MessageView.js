@@ -59,27 +59,32 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 			this.$el.remove();
 		},
 
-		startEditMode: function () {
+		startEditMode: function (e) {
 
-			this.$('.edit').addClass('editing');
-			this.$('.text').addClass('edit');
+			e.preventDefault();
+			console.log('Under construction!');
+
+			// this.$('.edit').addClass('editing');
+			// this.$('.text').addClass('edit');
 		},
 
-		closeEditMode: function () {
+		closeEditMode: function (e) {
 
-			var value = this.$('.editing').val();
+			e.preventDefault();
+			console.log('Under construction!');
+			// var value = this.$('.editing').val();
 
-			if (!value) {
-				this.deleteMessageModel();
-			}
-			else {
-				// call a mehtod on model!!
-				// this.model.save({text: value});
-				this.model.updateMessage(value);
-				this.$('.edit').removeClass('editing');
-				this.$('.text').removeClass('edit');
-			}
-			console.log(value);
+			// if (!value) {
+			// 	this.deleteMessageModel();
+			// }
+			// else {
+			// 	// call a mehtod on model!!
+			// 	// this.model.save({text: value});
+			// 	this.model.updateMessage(value);
+			// 	this.$('.edit').removeClass('editing');
+			// 	this.$('.text').removeClass('edit');
+			// }
+			// console.log(value);
 		},
 
 		scrollDown : function () {
