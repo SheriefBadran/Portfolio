@@ -36,7 +36,7 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 						// BoardItemListView.insertIntoDOM(portfolioMenu.View.el);
 						collectionView.insertIntoDOM(portfolioMenu.View.el, parentEl);
 						// parentEl.html(portfolioMenu.View.el);
-					}, 1600);
+					}, 1000);
 				};
 
 				if (collectionViewName === 'MenuItemListView') {
