@@ -186,6 +186,29 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 
 			// Render portfolioBoardMenu and menu if user start application with url: /contact
 			// this.index();
+			var menuWrapper = doc.querySelector('#menuBoard'),
+			portfolioMenuUl = doc.querySelector('.boardThumb');
+
+			try {
+
+				// Render the portfolio menu board if not already rendered.
+				// TODO: Rename to HTMLRenderer
+				if (portfolioMenuUl === null) {
+
+					RenderHTML.renderCollectionView('BoardItemListView', $('#portfolioMenu'));
+				};
+
+				// Render the menu if not already rendered.
+				// TODO: Rename to HTMLRenderer
+				if (menuWrapper === null) {
+
+					RenderHTML.renderCollectionView('MenuItemListView', container);
+				};
+			}
+			catch (e) {
+
+				console.log(e.message);
+			}
 
 			var wrapper = $('#contactForm');
 
