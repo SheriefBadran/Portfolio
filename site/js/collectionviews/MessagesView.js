@@ -150,7 +150,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 
 			// BUG!! Message is submit though textarea is empty.
 			if (e.keyCode != 13) { return; }
-			if (!this.$(".messageView").val()) { return; }
+			if (!this.$(".messageView").val() === '') { return; }
 
 			this.submitMessage();
 
