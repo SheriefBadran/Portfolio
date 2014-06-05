@@ -71,7 +71,7 @@ function (Factory, InitCollectionView, BoardItemListView, MenuItemListView) {
 				var chatLoaderView = new ChatLoaderView({}),
 				chatLoaderHTML = chatLoaderView.render();
 
-				if ($.trim($("#portfolioAppsContent").html()) === '' || $('#contactForm').length !== 0) {
+				if ($.trim($("#portfolioAppsContent").html()) === '' || $('#contactForm').length !== 0 || $('#myWork').length !== 0) {
 
 					$('#portfolioAppsContent').html(chatLoaderHTML.$el);
 				}

@@ -145,6 +145,10 @@ app.get('/contact', function (request, response) {
     response.sendfile(__dirname+'/site/index.html');
 });
 
+app.get('/My-Work', function (request, response) {
+    response.sendfile(__dirname+'/site/index.html');
+});
+
 // Get a list of all messages
 app.get( '/messages', function( request, response ) {
 

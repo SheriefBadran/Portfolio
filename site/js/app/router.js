@@ -11,10 +11,11 @@ define(['underscore',
 		'collectionviews/MessagesView',
 		'models/ContactForm',
 		'views/ContactFormView',
+		'views/MyWorkView',
 		'app/RenderCoreHTML',
 		'app/RenderHTML'
 ],
-function (_, Backbone, InitCollectionView, BoardItemListView, Messages, MessagesView, ContactForm, ContactFormView, RenderCoreHTML, RenderHTML) {
+function (_, Backbone, InitCollectionView, BoardItemListView, Messages, MessagesView, ContactForm, ContactFormView, MyWorkView, RenderCoreHTML, RenderHTML) {
 'use strict';
 	
 	// Private variables.
@@ -29,7 +30,8 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 		routes: {
 			'': 'index',
 			'chat': 'loadMessages',
-			'contact': 'loadContactForm'
+			'contact': 'loadContactForm',
+			'My-Work': 'loadMyWork'
 		},
 
 		initialize: function () {
@@ -55,7 +57,8 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 			chat = $('.messageWindow'),
 			menuWrapper = doc.querySelector('#menuBoard'),
 			portfolioMenuUl = doc.querySelector('.boardThumb'),
-			contactFormWrapper = $('#contactForm');
+			contactFormWrapper = $('#contactForm'),
+			myWorkWrapper = $('#myWork');
 
 			// If chatloader is still running, remove it from dom.
 			if (chatLoader.hasOwnProperty('selector') && chatLoader.length > 0) { 
@@ -78,6 +81,14 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 
 				contactFormWrapper.fadeOut(50, function () {
 
+					$(this).remove();
+				});
+			};
+
+			if (myWorkWrapper.hasOwnProperty('selector') && myWorkWrapper.length > 0) {
+
+				myWorkWrapper.fadeOut(50, function () {
+					
 					$(this).remove();
 				});
 			};
@@ -189,6 +200,12 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 			var menuWrapper = doc.querySelector('#menuBoard'),
 			portfolioMenuUl = doc.querySelector('.boardThumb');
 
+			// Abort get-request if user returns to contact form before chat messages are fetched/laoded.
+			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
+
+				chatMessagesFetch.abort();
+			};
+
 			try {
 
 				// Render the portfolio menu board if not already rendered.
@@ -212,12 +229,6 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 
 			var wrapper = $('#contactForm');
 
-			// Abort get-request if user returns to index (start page) before chat messages are fetched/laoded.
-			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
-
-				chatMessagesFetch.abort();
-			};
-
 			if (wrapper.hasOwnProperty('selector') && wrapper.length === 0) {
 
 				var contactForm = new ContactForm({});
@@ -226,6 +237,50 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 				var formHTML = contactFormView.render();
 
 				contactFormView.insertIntoDOM('fadeIn', formHTML.$el, $('#portfolioAppsContent'));
+			};
+		},
+
+		loadMyWork: function () {
+			
+			var myWorkView,
+			menuWrapper = doc.querySelector('#menuBoard'),
+			portfolioMenuUl = doc.querySelector('.boardThumb');
+
+			// Abort get-request if user returns to My-Work page before chat messages are fetched/laoded.
+			if (chatMessagesFetch !== undefined && chatMessagesFetch.readyState > 0 && chatMessagesFetch.readyState < 4) {
+
+				chatMessagesFetch.abort();
+			};
+
+			try {
+
+				// Render the portfolio menu board if not already rendered.
+				// TODO: Rename to HTMLRenderer
+				if (portfolioMenuUl === null) {
+
+					RenderHTML.renderCollectionView('BoardItemListView', $('#portfolioMenu'));
+				};
+
+				// Render the menu if not already rendered.
+				// TODO: Rename to HTMLRenderer
+				if (menuWrapper === null) {
+
+					RenderHTML.renderCollectionView('MenuItemListView', container);
+				};
+			}
+			catch (e) {
+
+				console.log(e.message);
+			}
+
+			var wrapper = $('#myWork');
+
+			if (wrapper.hasOwnProperty('selector') && wrapper.length === 0) {
+
+				myWorkView = new MyWorkView({});
+				var myWorkHTML = myWorkView.render().$el;
+
+				myWorkView.insertIntoDOM('fadeIn', myWorkHTML, $('#portfolioAppsContent'));
 			};
 		}
 	}));

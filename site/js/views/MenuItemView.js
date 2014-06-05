@@ -37,6 +37,11 @@ define(['underscore', 'backbone', 'text!templates/menuItem.html'], function (_, 
 
 				Backbone.history.navigate('', {trigger: true});
 			};
+
+			if (typeof menuChoice === 'string' && menuChoice === 'My Work') {
+
+				Backbone.history.navigate("/My-Work", {trigger: true});
+			};
 		}
 	});
 
