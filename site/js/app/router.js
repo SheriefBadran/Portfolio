@@ -66,7 +66,7 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 
 			if (chat.hasOwnProperty('selector') && chat.length > 0) {
 				
-				chat.fadeOut(200, function() {
+				chat.fadeOut(50, function() {
 					
 					$(this).remove();
 				});
@@ -76,7 +76,7 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 			// TODO: Destroy the contact form model.
 			if (contactFormWrapper.hasOwnProperty('selector') && contactFormWrapper.length > 0) { 
 
-				contactFormWrapper.fadeOut(200, function () {
+				contactFormWrapper.fadeOut(50, function () {
 
 					$(this).remove();
 				});

@@ -1,8 +1,8 @@
-#contanctForm {
+#contactForm {
 	position: relative;
-	width: 100px;
-	padding: 0px 5px;
-	margin: 0 auto;
+	width: 100%;
+	/*padding: 0px 5px;*/
+	margin: 20px auto;
 }
 
 form {
@@ -13,16 +13,18 @@ form {
 }
 
 input {
-	width: 100%;
+	display: block;
+	width: 90%;
 	height: 40px;
 	font: 300 24px "OpenSans", sans-serif;
-	margin: 5px 0 10px 0;
+	margin: 5px auto;
 }
 
 input[type=submit] {
+	margin-top: 5px;
 	background-color: #C13A40;
 	height: 50px;
-	width: 100%;
+	width: 91%;
 	border: none;
 	border-radius: 0;
 	font-weight: 400;
@@ -30,6 +32,10 @@ input[type=submit] {
 	letter-spacing: 2px;
 	color: #fff;
 	background-color: #FF9900;
+}
+
+label {
+	margin-left: 5%;
 }
 
 h2 {
@@ -49,6 +55,7 @@ input.invalid + .errorMsg {
 .errorMsg {
 	color: red;
 	display: none;
+	margin-left: 5%;
 }
 
 input.invalid {
