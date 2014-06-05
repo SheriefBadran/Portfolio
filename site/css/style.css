@@ -149,6 +149,10 @@ img .appIcon {
 	border-bottom: 5px solid #2A2A31;
 	overflow: hidden;
 	transition: height 0.5s linear 0s;
+	-webkit-transition: height 0.5s linear 0s;
+	-moz-transition: height 0.5s linear 0s;
+	-ms-transition: height 0.5s linear 0s;
+	-o-transition: height 0.5s linear 0s;
 }
 
 /*#menuBoard.keepDown {
