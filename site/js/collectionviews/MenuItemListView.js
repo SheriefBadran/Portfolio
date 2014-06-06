@@ -13,6 +13,8 @@ function (_, Backbone, MenuItemView, MenuTemplate) {
 
 		id: 'menuBoard',
 
+		className: 'hideMenu',
+
 		initialize: function () {
 			// this.collection.on('add', this.addItem, this);
 			this.$el.html(this.template());
@@ -46,6 +48,7 @@ function (_, Backbone, MenuItemView, MenuTemplate) {
 			}
 			else {
 
+				menuBoard.removeClass('hideMenu');
 				menuBoard.height(menuMaxHeight);
 			}
 		}

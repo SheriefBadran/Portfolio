@@ -26,6 +26,9 @@ define(['underscore', 'backbone', 'text!templates/menuItem.html'], function (_, 
 			
 			e.preventDefault();
 
+			$('#menuBoard').addClass('hideMenu');
+			$('#menuBoard').height(0);
+
 			var menuChoice = this.model.get('itemTitle');
 
 			if (typeof menuChoice === 'string' && menuChoice === 'Contact Me') {
