@@ -29,8 +29,8 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 
 		routes: {
 			'': 'index',
-			'chat': 'loadMessages',
-			'contact': 'loadContactForm',
+			'Chat': 'loadMessages',
+			'Contact-Me': 'loadContactForm',
 			'My-Work': 'loadMyWork'
 		},
 

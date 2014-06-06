@@ -41,7 +41,7 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 
 		renderJoinedChatMessage: function () {
 			
-			if (Backbone.history.fragment === 'chat') { this.scrollDown(); };
+			if (Backbone.history.fragment === 'Chat') { this.scrollDown(); };
 
 			this.$el.html(this.joinTemplate(this.model.toJSON()));
 			return this;

@@ -44,7 +44,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 				that.collection.add(message);
 				that.addMessage(message);
 
-				if (Backbone.history.fragment === 'chat') {
+				if (Backbone.history.fragment === 'Chat') {
 					$("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
 				};
 			});

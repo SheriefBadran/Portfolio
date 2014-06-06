@@ -39,7 +39,7 @@ define ([
 			if (typeof target.id === 'string' && target.id === 'Chat') {
 				
 				// IF I KEEP IT LIKE THIS - REMOVE THIS MODULE DEPENDENCY InitMessageWindow.
-				Backbone.history.navigate("chat", {trigger: true});
+				Backbone.history.navigate("Chat", {trigger: true});
 			};
 
 			if (typeof target.id === 'string' && target.id === 'Memory Game') {

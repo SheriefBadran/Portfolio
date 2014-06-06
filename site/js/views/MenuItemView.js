@@ -33,7 +33,7 @@ define(['underscore', 'backbone', 'text!templates/menuItem.html'], function (_, 
 
 			if (typeof menuChoice === 'string' && menuChoice === 'Contact Me') {
 
-				Backbone.history.navigate("/contact", {trigger: true});
+				Backbone.history.navigate("/Contact-Me", {trigger: true});
 			}
 
 			if (typeof menuChoice === 'string' && menuChoice === 'Home') {
