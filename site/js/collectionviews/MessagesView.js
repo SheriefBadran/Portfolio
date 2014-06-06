@@ -43,13 +43,21 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 
 				that.collection.add(message);
 				that.addMessage(message);
-				$("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
+
+				if (Backbone.history.fragment === 'chat') {
+					$("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
+				};
 			});
 
 			// CREATE MESSAGE WRITTEN BY CLIENT.
 			server.on('clientcreate', function (messageObj) {
 
-				var message = new Message({sender: messageObj.sender, text: messageObj.text, serverId: messageObj.serverId, date: messageObj.date});
+				var message = new Message({
+					sender: messageObj.sender, 
+					text: messageObj.text, 
+					serverId: messageObj.serverId, 
+					date: messageObj.date
+				});
 
 				message.thisClient = true;
 
