@@ -28,7 +28,7 @@ function (_, Backbone, Message, messageTemplate, messageBroadCastTemplate, joinM
 
 		render: function (e) {
 
-			this.scrollDown();
+			// this.scrollDown();
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		},
