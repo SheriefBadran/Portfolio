@@ -1,3 +1,3 @@
 Portfolio
 =========
-För beskrivning av projekt- och dokumentationsfiler, läs DocumentationsGuide.docx i mappen Slutleverans.
+För beskrivning av projekt- och dokumentationsfiler, läs DokumentationsGuide.docx i mappen Slutleverans.
