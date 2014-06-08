@@ -59,7 +59,7 @@ db.once('open', function callback () {
 
 // Schemas
 var Message = new mongoose.Schema({sender: String, text: String, serverId: String, _id: Object, date: Date});
-var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, date: Date, webpage: String});
+var ContactMessage = new mongoose.Schema({firstname: String, surname: String, email: String, webpage: String, comment: String, date: Date});
 
 // Models
 var MessageModel = mongoose.model('Message', Message);
@@ -137,15 +137,18 @@ io.sockets.on('connection', function(client){
 
 // ROUTES
 
-app.get('/chat', function(request, response) {
+app.get('/chat', function (request, response) {
+
 	response.sendfile(__dirname+'/site/index.html');
 });
 
-app.get('/contact', function (request, response) {
+app.get('/Contact-Me', function (request, response) {
+
     response.sendfile(__dirname+'/site/index.html');
 });
 
 app.get('/My-Work', function (request, response) {
+
     response.sendfile(__dirname+'/site/index.html');
 });
 
@@ -184,11 +187,12 @@ app.post('/form', function (request, response) {
    
    var contactMessage = new ContactMessageModel({
 
-        firstname: request.body.firstname,
-        surname: request.body.surname,
-        email: request.body.email,
-        date: request.body.date,
-        webpage: request.body.webpage
+        firstname: sanitize(request.body.firstname),
+        surname: sanitize(request.body.surname),
+        email: sanitize(request.body.email),
+        webpage: sanitize(request.body.webpage),
+        comment: sanitize(request.body.comment),
+        date: sanitize(request.body.date)
    });
 
    contactMessage.save(function (err) {

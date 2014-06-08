@@ -20,6 +20,17 @@ input {
 	margin: 5px auto;
 }
 
+#comment {
+	display: block;
+	width: 90%;
+	height: 120px;
+	font: 300 24px "OpenSans", sans-serif;
+	outline: none;
+	resize: none;
+	overflow: auto;
+	margin: 5px auto;
+}
+
 input[type=submit] {
 	margin-top: 20px;
 	height: 50px;

@@ -93,7 +93,7 @@ define([], function () {
 	validator.validationTypes.firstname = {
 
 		validate: function (value) {
-			return value !== "" && value.match(/^[a-zA-Z]+$/);
+			return value !== "" && value.match(/^[a-zåäöA-ZÅÄÖ]+$/);
 		},
 
 		instructions: "Please enter a valid first name (letters only)."
@@ -102,7 +102,7 @@ define([], function () {
 	validator.validationTypes.surname = {
 
 		validate: function (value) {
-			return value !== "" && value.match(/^[a-zA-Z]+$/);
+			return value !== "" && value.match(/^[a-zåäöA-ZÅÄÖ]+$/);
 		},
 
 		instructions: "Please enter a valid surname (letters only)."
@@ -134,6 +134,7 @@ define([], function () {
 
 	validator.validationTypes.webaddress = {
 
+		// TODO: Implement regex to check webaddresss format.
 		validate: function (value) {
 			
 			return value !== "";

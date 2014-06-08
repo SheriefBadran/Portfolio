@@ -10,7 +10,8 @@ define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Valid
 				surname: '',
 				email: '',
 				date: '',
-				webpage: ''
+				webpage: '',
+				comment: ''
 			};
 		},
 
@@ -19,12 +20,13 @@ define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Valid
 		id_Attribute: '_id',
 
 		validate: function (attributes, options) {
-			
+			console.log(attributes);
 			var data = {
-				firstname: attributes.firstname,
-				surname: attributes.surname,
-				email: attributes.email,
-				webaddress: attributes.webaddress
+				firstname: _.escape(attributes.firstname),
+				surname: _.escape(attributes.surname),
+				email: _.escape(attributes.email),
+				webaddress: _.escape(attributes.webpage),
+				comment: _.escape(attributes.comment)
 			};
 
 			Validator.config = {
@@ -48,7 +50,7 @@ define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Valid
 		validateField: function (fieldName, value) {
 
 			var data = {};
-			data[fieldName] = value;
+			data[fieldName] = _.escape(value);
 
 			Validator.config[fieldName] = fieldName;
 
@@ -66,11 +68,12 @@ define(['underscore', 'backbone', 'app/Validator'], function (_, Backbone, Valid
 			var contactForm = this;
 			
 			this.set({
-				firstname: formData.firstname,
-				surname: formData.surname,
-				email: formData.email,
-				date: new Date(),
-				webpage: formData.webpage
+				firstname: _.escape(formData.firstname),
+				surname: _.escape(formData.surname),
+				email: _.escape(formData.email),
+				webpage: _.escape(formData.webpage),
+				comment: _.escape(formData.comment),
+				date: _.escape(new Date())
 			});
 
 			// Above we set the model with data, hence we pass in null as first parameter instead of JSON key-value pair data. 

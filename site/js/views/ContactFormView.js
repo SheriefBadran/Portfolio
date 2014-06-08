@@ -58,10 +58,11 @@ function (_, Backbone, SuccessMessage, SuccessMessageView, ContactFormTemplate) 
 			e.preventDefault();
 			var formData = {};
 
-			formData.firstname = this.$('input[name=firstname]').val();
-			formData.surname = this.$('input[name=surname]').val();
-			formData.email = this.$('input[name=email]').val();
-			formData.webpage = this.$('input[name=webaddress]').val();
+			formData.firstname = _.escape(this.$('input[name=firstname]').val());
+			formData.surname = _.escape(this.$('input[name=surname]').val());
+			formData.email = _.escape(this.$('input[name=email]').val());
+			formData.webpage = _.escape(this.$('input[name=webaddress]').val());
+			formData.comment = _.escape(this.$('textarea[name=comment]').val());
 
 			this.model.saveFormData(formData);
 		},
