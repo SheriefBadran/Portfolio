@@ -151,8 +151,6 @@ function (_, Backbone, InitCollectionView, BoardItemListView, Messages, Messages
 
 			require(['app/AskForNickname'], function (AskForNickname) {
 				
-				console.log(AskForNickname);
-				console.log(server);
 				var nickname = AskForNickname();
 				server.emit('message:join', nickname);
 			});

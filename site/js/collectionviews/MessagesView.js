@@ -67,7 +67,6 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 				that.$(".messageView").val('');
 				that.$(".messageView").focus();
 				that.addMessage(message);
-				console.log(message);
 			});
 
 			// CREATE MESSAGE TO NOTIFY WHO JOINED CHAT.
@@ -123,7 +122,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 		},
 
 		renderMessages: function () {
-			console.log(this.collection);
+
 			this.collection.forEach(this.addMessage, this);
 			return this;
 		},
