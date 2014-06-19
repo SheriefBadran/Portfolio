@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 			options: {
 				'reporter': 'spec'
 			},
-			runner: ['tests/runner.html']
+			runner: ['localhost:8000/js/tests/runner.html']
 		},
 		jshint: {
 			all: [
