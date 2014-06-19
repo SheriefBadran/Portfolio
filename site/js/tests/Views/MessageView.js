@@ -17,12 +17,12 @@ define(['models/Message', 'views/MessageView'], function (Message, MessageView) 
 					expect(this.messageView.render()).to.equal(this.messageView);
 				});
 
-				it('messageView has a section top element', function () {
+				it('has a section top element', function () {
 
 					expect(this.messageView.render().el.nodeName.toLowerCase()).to.equal('section');
 				});
 
-				it('top element classname is set to message', function () {
+				it('expects top element classname to equal message', function () {
 
 					expect(this.messageView.className).to.eql('message');
 				});
@@ -34,32 +34,42 @@ define(['models/Message', 'views/MessageView'], function (Message, MessageView) 
 						this.messageView.render();
 					});
 
-					it('messageView contains the message text set in the model', function () {
+					it('contains expected message text', function () {
 
-						expect(this.messageView.$el.text()).to.eql('Hey, what\'s up?Hey, what\'s up?');
+						var messageSectionContents = this.messageView.$el.find('div').contents();
+						var messageSectionTextNodes = messageSectionContents.filter(function () {
+							
+							// Filter out all text nodes.
+							return this.nodeType === 3;
+						});
+
+						// Trim away all leading and ending whitespace.
+						var cleanMessageText = $.trim(messageSectionTextNodes.text());
+
+						expect(cleanMessageText).to.eql('Hey, what\'s up?');
 					});
 
-					it('messageView contains three div elements', function () {
+					it('contains three div elements', function () {
 
 						expect(this.messageView.$el.find('div')).to.have.length(3);
 					});
 
-					it('template parent node is a section element', function () {
+					it('expects template parent node to be a section element', function () {
 
 						expect(this.messageView.$el.find('div').prevObject[0].nodeName.toLowerCase()).to.eql('section');
 					});
 
-					it('messageView contains a topBar div element', function () {
+					it('contains a .topBar div element', function () {
 
 						expect(this.messageView.$el.find('div')[0].className).to.eql('topBar');
 					});
 
-					it('messageView contains a text div element', function () {
+					it('contains a .text div element', function () {
 
 						expect(this.messageView.$el.find('div')[1].className).to.eql('text');
 					});
 
-					it('messageView contains a bottomBar', function () {
+					it('contains a .bottomBar div element', function () {
 						
 						expect(this.messageView.$el.find('div')[2].className).to.eql('bottomBar');
 					});

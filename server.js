@@ -152,6 +152,11 @@ app.get('/My-Work', function (request, response) {
     response.sendfile(__dirname+'/site/index.html');
 });
 
+app.get('/js/tests/runner.html', function (request, response) {
+    
+    response.sendfile(__dirname+'/site/js/tests/runner.html');
+});
+
 // Get a list of all messages
 app.get( '/messages', function( request, response ) {
 

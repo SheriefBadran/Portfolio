@@ -13,43 +13,43 @@ define(['models/Message'], function (Message) {
 				date2 = secondDefaultMessage.attributes.date,
 				dataObj;
 
-				it('message model has to be an instance of the Message model class', function () {
+				it('has to be an instance of the Message model class', function () {
 
  					expect(firstDefaultMessage).to.be.an.instanceof(Message);
  				});
 
- 				it('message model has to be an object', function () {
+ 				it('has to be an object', function () {
 
  					expect(firstDefaultMessage).to.be.an.object;
  				});
 
- 				it('message model has a urlRoot property that equals /messages', function () {
+ 				it('has a urlRoot property that equals /messages', function () {
 
  					expect(firstDefaultMessage).to.have.property('urlRoot', '/messages');
  				});
 
- 				it('message Backbone model contains an object literal for model data', function () {
+ 				it('contains an object literal for model data', function () {
 
  					dataObj = firstDefaultMessage.attributes;
  					expect(dataObj).to.be.an.object;
  				});
 
- 				it('Default Backbone model-data has a text attribute that equals an empty string', function () {
+ 				it('has default model-data text attribute that equals an empty string', function () {
 
  					expect(firstDefaultMessage).to.have.deep.property('attributes.text', '');
  				});
 
- 				it('Default Backbone model-data has a date attribute', function () {
+ 				it('has default model-data date attribute', function () {
 
  					expect(firstDefaultMessage).to.have.deep.property('attributes.date');
  				});
 
- 				it('Instances of the Message model class can not share the same attributes-object', function () {
+ 				it('Expect instances of the Message model class to not share the same attributes-object', function () {
 
 					expect(firstDefaultMessage.attributes).to.not.equal(secondDefaultMessage.attributes);
 				});
 
- 				it('Instances of the Message model class can not share the same date instance.', function () {
+ 				it('Expect instances of the Message model class to not share the same date instance.', function () {
 
  					expect(date1).to.not.equal(date2);
  				});
@@ -62,7 +62,7 @@ define(['models/Message'], function (Message) {
 				var firstMessage = new Message({text: 'Hi, what\'s up?'});
 				var secondMessage = new Message({text: 'Hi, what\'s up?'});
 
-				it('message - model\'s text attribute represents input for message text', function () {
+				it('expects message - model\'s text attribute to equal message text', function () {
 
 					expect(firstMessage.toJSON().text).to.eql('Hi, what\'s up?');
 					expect(firstMessage.get('text')).to.eql('Hi, what\'s up?');
@@ -79,7 +79,7 @@ define(['models/Message'], function (Message) {
 						this.message = new Message();
 					});
 
-					it('message model should default message text to an empty string', function () {
+					it('should default message text to an empty string', function () {
 						
 						expect(this.message.get('text')).to.eql('');
 					});
