@@ -18,8 +18,9 @@ define(['underscore', 'backbone', 'text!templates/menuItem.html'], function (_, 
 
 		template: _.template(menuItemTemplate),
 
+		// Click event without selector fires on the view parent element (this.el$).
 		events: {
-			'click a': 'navigateOnClick'
+			'click': 'navigateOnClick'
 		},
 
 		navigateOnClick: function (e) {

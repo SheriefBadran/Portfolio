@@ -43,11 +43,13 @@ define ([
 			};
 
 			if (typeof target.id === 'string' && target.id === 'Memory Game') {
+
 				console.log('open memory game window');
 				// Backbone.history.navigate("rss", {trigger: true});
 			};
 
 			if (typeof target.id === 'string' && target.id === 'Rss Feeds') {
+				
 				console.log('open rss feeds window');
 			};
 		},
