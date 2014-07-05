@@ -74,6 +74,11 @@ define(['models/Message', 'views/MessageView'], function (Message, MessageView) 
 						expect(this.messageView.$el.find('div')[2].className).to.eql('bottomBar');
 					});
 				});
+				
+				// describe('Remove from DOM', function () {
+					
+
+				// });
 			});
 		}
 	};
