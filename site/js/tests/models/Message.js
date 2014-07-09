@@ -44,7 +44,7 @@ define(['models/Message'], function (Message) {
  					expect(firstDefaultMessage).to.have.deep.property('attributes.date');
  				});
 
- 				it('Expect instances of the Message model class to not share the same attributes-object', function () {
+ 				it('Expect instances of the Message model class to not share the exact same attributes-object', function () {
 
 					expect(firstDefaultMessage.attributes).to.not.equal(secondDefaultMessage.attributes);
 				});

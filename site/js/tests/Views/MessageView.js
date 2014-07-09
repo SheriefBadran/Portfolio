@@ -49,14 +49,19 @@ define(['models/Message', 'views/MessageView'], function (Message, MessageView) 
 						expect(cleanMessageText).to.eql('Hey, what\'s up?');
 					});
 
-					it('contains three div elements', function () {
-
-						expect(this.messageView.$el.find('div')).to.have.length(3);
+					it('expects render() to return the view object', function () {
+						
+						expect(this.messageView.render()).to.equal(this.messageView)
 					});
 
 					it('expects template parent node to be a section element', function () {
+						
+						expect(this.messageView.render().el.nodeName).to.equal('SECTION');
+					});
 
-						expect(this.messageView.$el.find('div').prevObject[0].nodeName.toLowerCase()).to.eql('section');
+					it('contains three div elements', function () {
+
+						expect(this.messageView.$el.find('div')).to.have.length(3);
 					});
 
 					it('contains a .topBar div element', function () {
@@ -75,10 +80,50 @@ define(['models/Message', 'views/MessageView'], function (Message, MessageView) 
 					});
 				});
 				
-				// describe('Remove from DOM', function () {
-					
+				describe('Delete Message', function() {
+						
+					beforeEach(function () {
 
-				// });
+						// Render the message in browser test area.
+						$('#testarea').html(this.messageView.render().el);
+
+						this.deleteModelStub = sinon.stub(this.messageView, 'deleteMessageModel');
+						this.removeFromDomStub = sinon.stub(this.messageView, 'removeMessageFromDom');
+					});
+
+					afterEach(function () {
+						
+						this.deleteModelStub.restore();
+						this.removeFromDomStub.restore();
+					});
+
+					it('removes the message model when delete icon is clicked', function () {
+						
+						// trig the click event on the span.deleteIcon element  
+						$('.deleteIcon').click(function () {
+							
+							expect(this.deleteModelStub).to.have.been.calledOnce;
+						});
+					});
+
+					it('expects removeMessageFromDom() to be called', function () {
+						
+						$('deleteIcon').click(function () {
+							
+							expect(this.removeFromDomStub).to.have.been.calledOnce;
+						});
+					});
+
+					it('removes message markup from the DOM when delete icon is clicked', function () {
+						
+						// messageView.deleteMessageModel triggers the destroy event.
+						this.message.trigger('destroy', this);
+
+						var testarea = document.getElementById('testarea');
+						var messageSection = testarea.getElementsByClassName('message');
+						expect(messageSection[0]).to.equal(undefined);
+					});
+				});	
 			});
 		}
 	};
