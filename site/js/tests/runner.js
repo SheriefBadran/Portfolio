@@ -7,6 +7,8 @@ require.config({
 		app: '../app',
 		models: '../models',
 		views: '../views',
+		collections: '../collections',
+		collectionviews: '../collectionviews',
 
 		// file paths
 		'socketio': '../../socket.io/socket.io',
@@ -31,14 +33,16 @@ require.config({
 
 var tests = [
 	'tests/models/Message',
-	'tests/views/MessageView'
+	'tests/views/MessageView',
+	'tests/collectionviews/MessagesView'
 ];
 
-require (tests, function(Message, MessageView) {
+require (tests, function(Message, MessageView, MessagesView) {
 
 	// Execute tests!
 	Message.test();
 	MessageView.test();
+	MessagesView.test();
 
 	if (window.mochaPhantomJS) {
 		mochaPhantomJS.run();

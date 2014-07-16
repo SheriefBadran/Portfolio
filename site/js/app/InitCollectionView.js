@@ -5,7 +5,7 @@ define(['underscore', 'backbone'], function (_, Backbone) {
 
 		if (_.isArray(modelsArr) && collection instanceof Backbone.Collection && typeof CollectionView === 'function') {
 
-			// The literal objects in the boardItems array will become a collection of models when reset to the collection.
+			// The literal objects in the array will become a collection of models when reset to the collection.
 			collection.reset(modelsArr);
 
 			// Instantiate backbone collection view - class. The collectionview manages all collection's models and views.

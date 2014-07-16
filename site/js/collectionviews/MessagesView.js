@@ -151,6 +151,7 @@ function (_, Backbone, Message, MessageView, messagesViewTemplate) {
 		initialRender: function () {
 
 			this.$el.html(this.template());
+			return this;
 		},
 
 		submitOnEnter: function (e) {

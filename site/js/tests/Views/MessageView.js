@@ -6,28 +6,41 @@ define(['models/Message', 'views/MessageView'], function (Message, MessageView) 
 			
 			describe('Message View', function () {
 
-				beforeEach(function () {
+				describe('Fundamental View Properties', function () {
+					
+					beforeEach(function () {
 
-					this.message = new Message({text: 'Hey, what\'s up?'});
-					this.messageView = new MessageView({model: this.message});
+						this.message = new Message({text: 'Hey, what\'s up?'});
+						this.messageView = new MessageView({model: this.message});
+					});
+
+					it('expect render() to return the view object', function () {
+
+						expect(this.messageView.render()).to.equal(this.messageView);
+					});
+
+					it('expect renderBroadCast() to return the view object', function () {
+
+						expect(this.messageView.renderBroadCast()).to.equal(this.messageView);
+					});
+
+					it('expect renderJoinedChatMessage() to return the view object', function () {
+
+						expect(this.messageView.renderJoinedChatMessage()).to.equal(this.messageView);
+					});
+
+					it('has a section top element', function () {
+
+						expect(this.messageView.render().el.nodeName.toLowerCase()).to.equal('section');
+					});
+
+					it('expects top element classname to equal message', function () {
+
+						expect(this.messageView.className).to.eql('message');
+					});
 				});
 
-				it('expect render() to return the view object', function () {
-
-					expect(this.messageView.render()).to.equal(this.messageView);
-				});
-
-				it('has a section top element', function () {
-
-					expect(this.messageView.render().el.nodeName.toLowerCase()).to.equal('section');
-				});
-
-				it('expects top element classname to equal message', function () {
-
-					expect(this.messageView.className).to.eql('message');
-				});
-
-				describe('Template', function () {
+				describe('Message Template', function () {
 
 					beforeEach(function () {
 
@@ -47,11 +60,6 @@ define(['models/Message', 'views/MessageView'], function (Message, MessageView) 
 						var cleanMessageText = $.trim(messageSectionTextNodes.text());
 
 						expect(cleanMessageText).to.eql('Hey, what\'s up?');
-					});
-
-					it('expects render() to return the view object', function () {
-						
-						expect(this.messageView.render()).to.equal(this.messageView)
 					});
 
 					it('expects template parent node to be a section element', function () {
