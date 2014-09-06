@@ -7,8 +7,8 @@ var application_root = __dirname,
     bodyParser      = require('body-parser'), // (since Express 4.0.0)
     methodOverride  = require('method-override'), // (since Express 4.0.0)
     errorHandler    = require('errorhandler'), // (since Express 4.0.0)
-    path            = require( 'path' ), //Utilities for dealing with file paths
-    mongoose        = require( 'mongoose' ), //MongoDB integration
+    path            = require( 'path' ), // Utilities for dealing with file paths
+    mongoose        = require( 'mongoose' ), // MongoDB integration
     app             = express();
 
 
