@@ -1,11 +1,15 @@
-{    
-	"name": "Portfolio_Application_Server",
-    "version": "0.0.1",
-    "description": "Portfolio_Application",
-    "dependencies": {
-        "express": "~3.1.0",
-        "path": "~0.4.9",
-        "mongoose": "~3.5.5",
-        "socket.io": "~0.9.16"
-    }
+{
+  "name": "Portfolio_Application_Server",
+  "version": "0.0.1",
+  "description": "Portfolio_Application",
+  "dependencies": {
+    "body-parser": "~1.0.0",
+    "errorhandler": "^1.1.1",
+    "express": "~4.0.0",
+    "method-override": "~1.0.0",
+    "mongoose": "~3.5.5",
+    "morgan": "~1.0.0",
+    "path": "~0.4.9",
+    "socket.io": "~0.9.16"
+  }
 }

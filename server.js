@@ -1,36 +1,30 @@
 #!/bin/env node
 
+
 var application_root = __dirname,
-    express = require( 'express' ), //Web framework
-    path = require( 'path' ), //Utilities for dealing with file paths
-    mongoose = require( 'mongoose' ); //MongoDB integration
-    // var socket = require('socket.io');
+    express         = require('express'), //Web framework
+    morgan          = require('morgan'), // (since Express 4.0.0)
+    bodyParser      = require('body-parser'), // (since Express 4.0.0)
+    methodOverride  = require('method-override'), // (since Express 4.0.0)
+    errorHandler    = require('errorhandler'), // (since Express 4.0.0)
+    path            = require( 'path' ), //Utilities for dealing with file paths
+    mongoose        = require( 'mongoose' ), //MongoDB integration
+    app             = express();
 
-//Create server
-// var app = express();
-// var io = socket.listen(app);
 
-var app = express();
 
-// Configure server
-app.configure( function() {
-    //parses request body and populates request.body
-    app.use( express.bodyParser() );
+// Configure server (since Express 4.0.0)
+var env = process.env.NODE_ENV || 'development'
 
-    //checks request.body for HTTP method overrides
-    app.use( express.methodOverride() );
+if ('development' == env) {
 
-    //perform route lookup based on URL and HTTP method
-    app.use( app.router );
+    app.use('/', express.static(path.join(application_root, 'site')));
+    app.use(morgan('dev'));
+    app.use(bodyParser());
+    app.use(methodOverride());
+    app.use(errorHandler({ dumpExceptions: true, showStack: true }));    
+};
 
-    //Where to serve static content
-    app.use('/', express.static( path.join( application_root, 'site') ) );
-
-    //Show all errors in development
-    app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-// server.listen(3000);
 
 //Start server
 var ipaddr  = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
@@ -212,48 +206,96 @@ app.post('/form', function (request, response) {
    return response.send(contactMessage);
 });
 
+// GET, PUT AND DELETE ROUTES for a single chat message. This works since Express 4.0.0
+// Call out HTTP verbs on the route() method. route() method provides an instance of Route.
+app.route('/messages/:id')
+
+	// Get a single message by id
+	.get(function(request, response) {
+		
+	    return MessageModel.findById( request.params.id, function( err, message ) {
+	        if( !err ) {
+	            return response.send( message );
+	        } else {
+	            return console.log( err );
+	        }
+	    });
+	})
+	
+	// Update a message
+	.put(function(request, response) {
+
+	    return MessageModel.findById( request.params.id, function( err, message ) {
+	        message.text = request.body.text;
+	        message.date = request.body.date;
+
+	        return message.save( function( err ) {
+	            if( !err ) {
+	                console.log( 'message updated' );
+	            } else {
+	                console.log( err );
+	            }
+	            return response.send( message );
+	        });
+	    });
+	})
+	
+	.delete(function(request, response) {
+	   
+	    return MessageModel.findById( request.params.id, function( err, message ) {
+	        return message.remove( function( err ) {
+	            if( !err ) {
+	                console.log( 'Message removed' );
+	                return response.send( '' );
+	            } else {
+	                console.log( err );
+	            }
+	        });
+	    });
+	});
+
 // Get a single message by id
-app.get( '/messages/:id', function( request, response ) {
-    return MessageModel.findById( request.params.id, function( err, message ) {
-        if( !err ) {
-            return response.send( message );
-        } else {
-            return console.log( err );
-        }
-    });
-});
-
-// Update a message
-app.put( '/messages/:id', function( request, response ) {
-    console.log( 'Updating message ' + request.body.text );
-    return MessageModel.findById( request.params.id, function( err, message ) {
-        message.text = request.body.text;
-        message.date = request.body.date;
-
-        return message.save( function( err ) {
-            if( !err ) {
-                console.log( 'message updated' );
-            } else {
-                console.log( err );
-            }
-            return response.send( message );
-        });
-    });
-});
-
-app.delete( '/messages/:id', function( request, response ) {
-    console.log( 'Deleting message with id: ' + request.params.id );
-    return MessageModel.findById( request.params.id, function( err, message ) {
-        return message.remove( function( err ) {
-            if( !err ) {
-                console.log( 'Message removed' );
-                return response.send( '' );
-            } else {
-                console.log( err );
-            }
-        });
-    });
-});
+// app.get( '/messages/:id', function( request, response ) {
+//     return MessageModel.findById( request.params.id, function( err, message ) {
+//         if( !err ) {
+//             return response.send( message );
+//         } else {
+//             return console.log( err );
+//         }
+//     });
+// });
+// 
+// // Update a message
+// app.put( '/messages/:id', function( request, response ) {
+//     console.log( 'Updating message ' + request.body.text );
+//     return MessageModel.findById( request.params.id, function( err, message ) {
+//         message.text = request.body.text;
+//         message.date = request.body.date;
+// 
+//         return message.save( function( err ) {
+//             if( !err ) {
+//                 console.log( 'message updated' );
+//             } else {
+//                 console.log( err );
+//             }
+//             return response.send( message );
+//         });
+//     });
+// });
+// 
+// app.delete( '/messages/:id', function( request, response ) {
+//     console.log( 'Deleting message with id: ' + request.params.id );
+//     return MessageModel.findById( request.params.id, function( err, message ) {
+//         return message.remove( function( err ) {
+//             if( !err ) {
+//                 console.log( 'Message removed' );
+//                 return response.send( '' );
+//             } else {
+//                 console.log( err );
+//             }
+//         });
+//     });
+// });
 
 
 // DB TEST CALLS FROM BROWSER CONSOLE
